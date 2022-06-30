@@ -1,6 +1,6 @@
 NAME 	=	cub3D
 
-FILES	=	main
+FILES	=	main minimap pixel_put draw_line
 
 SRC		=	$(addprefix src/, $(FILES:$(FILE_EXTENSION)=.c))
 OBJ		= $(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
