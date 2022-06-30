@@ -1,9 +1,9 @@
 NAME 	=	cub3D
 
-FILES	=	main
+FILES	=	main gnl/get_next_line gnl/get_next_line_utils
 
 SRC		=	$(addprefix src/, $(FILES:$(FILE_EXTENSION)=.c))
-OBJ		= $(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
+OBJ		=	$(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
 INC		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 CC		=	gcc
 

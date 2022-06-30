@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/06/30 13:39:28 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/06/30 14:22:54 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*fakemap(void)
 int	clean(t_game *g)
 {
 	free(g->map);
-	//mlx_destroy_window(g->mlx, g->win);
+	mlx_destroy_window(g->mlx, g->win);
 	//free (g);
 	exit (0);
 }
@@ -70,8 +70,8 @@ t_game	*init(t_game *g)
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, 1920, 1080, "cub3D");
 	g->map = fakemap();
-	mlx_key_hook(g->win, key_hook, &g);
-	mlx_hook(g->win, 17, 0, clean, &g);
+	mlx_key_hook(g->win, key_hook, g);
+	mlx_hook(g->win, 17, 0, clean, g);
 	return (g);
 }
 
