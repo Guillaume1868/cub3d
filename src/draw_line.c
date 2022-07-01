@@ -6,92 +6,49 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 16:19:05 by gaubert           #+#    #+#             */
-/*   Updated: 2022/06/30 16:46:44 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/01 15:41:44 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
 #include "pixel_put.h"
+#include "draw_line.h"
 
-void	plot_line_low(t_game *g, t_point start, t_point end, int color)
+void	draw_line(t_game *g, t_point o, t_point i, int color)
 {
-	int	dx;
-	int	dy;
-	int	d;
-	int	y;
-	int	x;
-	int yi;
+	t_vars	v;
 
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	yi = 1;
-	if (dy < 0)
-	{
-		yi = -1;
-		dy = -dy;
-	}
-	d = 2 * dy - dx;
-	y = start.y;
-	x = start.x - 1;
-	while (++x <= end.x)
-	{
-		my_mlx_pixel_put(&g->img, x, y, color);
-		if (d > 0)
-		{
-			y = y + yi;
-			d = d + (2 * (dy - dx));
-		}
-		d = d + 2 * dy;
-	}
-}
-
-void	plot_line_high(t_game *g, t_point start, t_point end, int color)
-{
-	int	dx;
-	int	dy;
-	int	d;
-	int	y;
-	int	x;
-	int xi;
-
-	dx = end.x - start.x;
-	dy = end.y - start.y;
-	xi = 1;
-	if (dx < 0)
-	{
-		xi = -1;
-		dx = -dx;
-	}
-	d = (2 * dx) - dy;
-	x = start.x;
-	y = start.y - 1;
-	while (++y <= end.y)
-	{
-		my_mlx_pixel_put(&g->img, x, y, color);
-		if (d > 0)
-		{
-			x = x + xi;
-			d = d + (2 * (dx - dy));
-		}
-		d = d + 2 * dx;
-	}
-}
-
-void	draw_line(t_game *g, t_point start, t_point end, int color)
-{
-	if (abs(end.y - start.y) < abs(end.x - start.x))
-	{
-		if (start.x > end.x)
-			plot_line_low(g, end, start, color);
-		else
-			plot_line_low(g, start, end, color);
-	}
+	v.dx = abs(i.x - o.x);
+	if (o.x < i.x)
+		v.sx = 1;
 	else
+		v.sx = -1;
+	v.dy = -abs(i.y - o.y);
+	if (o.y < i.y)
+		v.sy = 1;
+	else
+		v.sy = -1;
+	v.error = v.dx + v.dy;
+	while (1)
 	{
-		if (start.y > end.y)
-			plot_line_high(g, end, start, color);
-		else
-			plot_line_high(g, start, end, color);
+		my_mlx_pixel_put(&g->img, o.x, o.y, color);
+		if (o.x == i.x && o.y == i.y)
+			break ;
+		v.e2 = 2 * v.error;
+		if (v.e2 >= v.dy)
+		{
+			if (o.x == i.x)
+				break ;
+			v.error = v.error + v.dy;
+			o.x = o.x + v.sx;
+		}
+		if (v.e2 <= v.dx)
+		{
+			if (o.y == i.y)
+				break ;
+			v.error = v.error + v.dx;
+			o.y = o.y + v.sy;
+		}
 	}
 }

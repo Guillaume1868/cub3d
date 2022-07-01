@@ -6,16 +6,15 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/06/30 17:05:37 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/01 15:38:46 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
 #include "pixel_put.h"
+#include "draw_line.h"
 #include <math.h>
-
-void	draw_line(t_game *g, t_point start, t_point end, int color);
 
 void	draw_player(t_game *g)
 {
