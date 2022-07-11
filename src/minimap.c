@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/01 15:38:46 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/11 10:18:15 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,54 @@
 
 void	draw_player(t_game *g)
 {
-	int		x;
-	int		y;
-	int		a;
-	int		b;
-	t_point	end;
-	t_point start;
+	t_vars2	v;
 
-	x = -1;
-	while (++x < MMS)
+	v.x = -1;
+	while (++v.x < MMS)
 	{
-		y = -1;
-		while (++y < MMS)
+		v.y = -1;
+		while (++v.y < MMS)
 		{
-			a = x - MMS / 4;
-			b = y - MMS / 4;
-			if (sqrt((a * a) + (b * b)) < MMS / 4)
+			v.a = v.x - MMS / 4;
+			v.b = v.y - MMS / 4;
+			if (sqrt((v.a * v.a) + (v.b * v.b)) < MMS / 4)
 			{
 				my_mlx_pixel_put(&g->img,
-					g->player_pos.x * MMS + x - MMS / 4,
-					g->player_pos.y * MMS + y - MMS / 4,
+					g->player_pos.x * MMS + v.x - MMS / 4,
+					g->player_pos.y * MMS + v.y - MMS / 4,
 					0x00ffff00);
 			}
 		}
 	}
-	start.x = (int)(g->player_pos.x * MMS);
-	start.y = (int)(g->player_pos.y * MMS);
-	end.x = start.x - 1 * MMS;
-	end.y = start.y + 0 * MMS + 20;
-	draw_line(g, start, end, 0x00ff00ff);
+	v.start.x = (int)(g->player_pos.x * MMS);
+	v.start.y = (int)(g->player_pos.y * MMS);
+	v.end.x = v.start.x - 1 * MMS;
+	v.end.y = v.start.y + 0 * MMS + 20;
+	draw_line(g, v.start, v.end, 0x00ff00ff);
 }
 
 void	draw_square(t_coord c, int color, t_game *g)
 {
 	int	x;
 	int	y;
+	int	dc;
+	int	wdth;
 
 	x = -1;
+	wdth = MMS / 25;
+	if (wdth < 1)
+		wdth = 1;
 	while (++x < MMS)
 	{
 		y = -1;
 		while (++y < MMS)
 		{
-			my_mlx_pixel_put(&g->img, c.x * MMS + x, c.y * MMS + y, color);
+			if (((x < wdth) || (y < wdth))
+				|| ((MMS - x < wdth) || (MMS - y < wdth)))
+				dc = 0x0042424242;
+			else
+				dc = color;
+			my_mlx_pixel_put(&g->img, c.x * MMS + x, c.y * MMS + y, dc);
 		}
 	}
 }
@@ -88,7 +93,7 @@ void	draw_minimap(t_game *g)
 		}
 	}
 	g->player_pos.x = 3.5;
-	g->player_pos.y = 1.25;
+	g->player_pos.y = 2.25;
 	draw_player(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
 }
