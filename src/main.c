@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 15:38:01 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/11 16:07:26 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <math.h>
 #define MAPSIZE 10
 
-char	*fakemap(void)
+char	*fakemap(t_game *g)
 {
 	char	*map;
 	int		i;
@@ -33,6 +33,11 @@ char	*fakemap(void)
 	}
 	map[13] = '1';
 	map[17] = 'N';
+	g->p.angle = 3 * PI / 2;
+	g->p.x = 7.5;
+	g->p.y = 1.5;
+	g->p.dx = cos(g->p.angle) / 5;
+	g->p.dy = sin(g->p.angle) / 5;
 	return (map);
 }
 
@@ -51,7 +56,7 @@ t_game	*init(t_game *g)
 	g->map_width = MAPSIZE;
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, 1920, 1080, "cub3D");
-	g->map = fakemap();
+	g->map = fakemap(g);
 	g->img.img = mlx_new_image(g->mlx, 1920, 1080);
 	g->img.addr = mlx_get_data_addr(g->img.img, &g->img.bits_per_pixel,
 			&g->img.line_length, &g->img.endian);
@@ -66,11 +71,7 @@ int	main(void)
 
 	init(&g);
 	g.state = playing;
-	g.p.x = 2;
-	g.p.y = 2;
-	g.p.dx = 0;
-	g.p.dy = 0;
-	g.p.angle = 1;
+
 	draw_minimap(&g);
 	mlx_loop(g.mlx);
 }
