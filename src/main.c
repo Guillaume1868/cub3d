@@ -6,13 +6,13 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/06/30 15:05:51 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/11 13:21:14 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
-
+#include <math.h>
 #define MAPSIZE 10
 
 char	*fakemap(void)
@@ -44,18 +44,35 @@ int	clean(t_game *g)
 
 int	key_hook(int keycode, t_game *g)
 {
-	printf("%d\n", g->state);
-	(void) g;
 	if (keycode == 13 && g->state == playing)
-		write(1, "13\n", 3);
+	{
+		g->p.x += g->p.dx;
+		g->p.y += g->p.dy;
+	}
 	else if (keycode == 0 && g->state == playing)
-		write(1, "0\n", 2);
+	{
+		g->p.angle -= 0.1;
+		if (g->p.angle < 0)
+			g->p.angle += 2 * PI;
+		g->p.dx = cos(g->p.angle) / 5;
+		g->p.dy = sin(g->p.angle) / 5;
+	}
 	else if (keycode == 1 && g->state == playing)
-		write(1, "1\n", 2);
+	{
+		g->p.x -= g->p.dx;
+		g->p.y -= g->p.dy;
+	}
 	else if (keycode == 2 && g->state == playing)
-		write(1, "2\n", 2);
+	{
+		g->p.angle += 0.1;
+		if (g->p.angle > 2 * PI)
+			g->p.angle -= 2 * PI;
+		g->p.dx = cos(g->p.angle) / 5;
+		g->p.dy = sin(g->p.angle) / 5;
+	}
 	else if (keycode == 53)
 		clean(g);
+	draw_minimap(g);
 	return (0);
 }
 
@@ -83,6 +100,11 @@ int	main(void)
 	setbuf(stdout, NULL);
 	init(&g);
 	g.state = playing;
+	g.p.x = 2;
+	g.p.y = 2;
+	g.p.dx = 0;
+	g.p.dy = 0;
+	g.p.angle = 1;
 	draw_minimap(&g);
 	mlx_loop(g.mlx);
 }
