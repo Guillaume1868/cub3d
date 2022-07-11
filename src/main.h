@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 13:11:11 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:32:04 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ typedef struct s_game
 	t_player	p;
 	t_state		state;
 }				t_game;
+
+int	clean(t_game *g);
 
 #endif

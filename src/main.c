@@ -6,12 +6,13 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 13:21:14 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:38:01 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
+#include "move.h"
 #include <math.h>
 #define MAPSIZE 10
 
@@ -42,40 +43,6 @@ int	clean(t_game *g)
 	exit (0);
 }
 
-int	key_hook(int keycode, t_game *g)
-{
-	if (keycode == 13 && g->state == playing)
-	{
-		g->p.x += g->p.dx;
-		g->p.y += g->p.dy;
-	}
-	else if (keycode == 0 && g->state == playing)
-	{
-		g->p.angle -= 0.1;
-		if (g->p.angle < 0)
-			g->p.angle += 2 * PI;
-		g->p.dx = cos(g->p.angle) / 5;
-		g->p.dy = sin(g->p.angle) / 5;
-	}
-	else if (keycode == 1 && g->state == playing)
-	{
-		g->p.x -= g->p.dx;
-		g->p.y -= g->p.dy;
-	}
-	else if (keycode == 2 && g->state == playing)
-	{
-		g->p.angle += 0.1;
-		if (g->p.angle > 2 * PI)
-			g->p.angle -= 2 * PI;
-		g->p.dx = cos(g->p.angle) / 5;
-		g->p.dy = sin(g->p.angle) / 5;
-	}
-	else if (keycode == 53)
-		clean(g);
-	draw_minimap(g);
-	return (0);
-}
-
 t_game	*init(t_game *g)
 {
 	g->map = NULL;
@@ -97,7 +64,6 @@ int	main(void)
 {
 	t_game	g;
 
-	setbuf(stdout, NULL);
 	init(&g);
 	g.state = playing;
 	g.p.x = 2;

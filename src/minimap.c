@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 13:35:31 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/11 15:31:44 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ void	draw_player(t_game *g)
 		v.y = -1;
 		while (++v.y < MMS)
 		{
-			v.a = v.x - MMS / 4;
-			v.b = v.y - MMS / 4;
-			if (sqrt((v.a * v.a) + (v.b * v.b)) < MMS / 4)
+			v.a = v.x - MMS / 5;
+			v.b = v.y - MMS / 5;
+			if (sqrt((v.a * v.a) + (v.b * v.b)) < MMS / 5)
 			{
 				my_mlx_pixel_put(&g->img,
-					g->p.x * MMS + v.x - MMS / 4,
-					g->p.y * MMS + v.y - MMS / 4,
+					g->p.x * MMS + v.x - MMS / 5,
+					g->p.y * MMS + v.y - MMS / 5,
 					0x00ffff00);
 			}
 		}
 	}
 	v.start.x = (int)(g->p.x * MMS);
 	v.start.y = (int)(g->p.y * MMS);
-	v.end.x = (g->p.x + g->p.dx) * MMS;
-	v.end.y = (g->p.y + g->p.dy) * MMS;
+	v.end.x = (g->p.x * MMS) + (g->p.dx) * MMS ;
+	v.end.y = (g->p.y * MMS) + (g->p.dy) * MMS ;
 	draw_line(g, v.start, v.end, 0x00ff00ff);
 }
 
@@ -70,6 +70,11 @@ void	draw_square(t_coord c, int color, t_game *g)
 	}
 }
 
+void	ray_cast(t_game *g)
+{
+	(void) g;
+}
+
 void	draw_minimap(t_game *g)
 {
 	int		x;
@@ -93,5 +98,6 @@ void	draw_minimap(t_game *g)
 		}
 	}
 	draw_player(g);
+	ray_cast(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
 }
