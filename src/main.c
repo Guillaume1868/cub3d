@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 16:07:26 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/11 16:30:03 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	main(void)
 
 	init(&g);
 	g.state = playing;
-
 	draw_minimap(&g);
 	mlx_loop(g.mlx);
 }
