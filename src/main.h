@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 15:32:04 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/13 15:52:29 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include "../mlx/mlx.h"
 # include <stdlib.h>
 # define PI 3.1415926535
+# define P2 1.57079632675
+# define P3 4.71238898025
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 typedef struct s_coord
 {

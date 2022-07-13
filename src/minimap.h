@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:21 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 13:00:31 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/13 16:48:24 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,28 @@ typedef struct s_vars2
 	t_point	end;
 	t_point	start;
 }				t_vars2;
+
+typedef struct s_rvars
+{
+	int		r;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+	float	atan;
+	float	hx;
+	float	hy;
+	float	vx;
+	float	vy;
+	float	disH;
+	float	disV;
+	t_point	s;
+	t_point	e;
+}				t_rvars;
 
 #endif

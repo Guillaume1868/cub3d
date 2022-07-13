@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 16:30:03 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/13 13:38:58 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	*fakemap(t_game *g)
 			map[i] = '0';
 	}
 	map[13] = '1';
-	map[17] = 'N';
+	map[23] = 'N';
 	g->p.angle = 3 * PI / 2;
-	g->p.x = 7.5;
-	g->p.y = 1.5;
+	g->p.x = 3.5;
+	g->p.y = 2.5;
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
 	return (map);
@@ -55,7 +55,7 @@ t_game	*init(t_game *g)
 	g->map_height = MAPSIZE;
 	g->map_width = MAPSIZE;
 	g->mlx = mlx_init();
-	g->win = mlx_new_window(g->mlx, 1920, 1080, "cub3D");
+	g->win = mlx_new_window(g->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	g->map = fakemap(g);
 	g->img.img = mlx_new_image(g->mlx, 1920, 1080);
 	g->img.addr = mlx_get_data_addr(g->img.img, &g->img.bits_per_pixel,

@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 15:31:44 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/13 16:57:14 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,85 @@ void	draw_square(t_coord c, int color, t_game *g)
 	}
 }
 
+void	while_dof(t_game *g, t_rvars *v)
+{
+	while (v->dof < 8)
+	{
+		v->mx = (int)(v->rx);
+		v->my = (int)(v->ry);
+		v->mp = v->my * g->map_width + v->mx;
+		if (v->mp > 0 && v->mp < g->map_width * g->map_height
+			&& g->map[v->mp] == '1')
+			v->dof = 8;
+		else
+		{
+			v->rx += v->xo;
+			v->ry += v->yo;
+			v->dof += 1;
+			write(1, ".", 1);
+		}
+	}
+}
+
 void	ray_cast(t_game *g)
 {
-	(void) g;
+	t_rvars	v;
+
+	v.ra = g->p.angle;
+	v.r = -1;
+	while (++v.r < 1)
+	{
+		//horizontal lines
+		v.dof = 0;
+		v.atan = -1 / tan(v.ra);
+		if (v.ra > PI) //looking up
+		{
+			v.ry = (int) g->p.y - 0.0001;
+			v.rx = (g->p.y - v.ry) * v.atan + g->p.x;
+			v.yo = -1;
+			v.xo = -v.yo * v.atan;
+		}
+		if (v.ra < PI && v.ra != 0) //looking down
+		{
+			v.ry = (int) g->p.y + 1;
+			v.rx = (g->p.y - v.ry) * v.atan + g->p.x;
+			v.yo = 1;
+			v.xo = -v.yo * v.atan;
+		}
+		if (v.ra == 0 || v.ra == PI)
+		{
+			v.rx = g->p.x;
+			v.ry = g->p.y;
+			v.dof = 8;
+		}
+		while_dof(g, &v);
+		draw_map_ray(g, &v);
+		//vertical lines
+		v.dof = 0;
+		v.atan = -tan(v.ra);
+		if (v.ra > PI / 2 && v.ra < 3 * PI / 2) //looking left
+		{
+			v.rx = (int) g->p.x - 0.0001;
+			v.ry = (g->p.x - v.rx) * v.atan + g->p.y;
+			v.xo = -1;
+			v.yo = -v.xo * v.atan;
+		}
+		if (v.ra < PI / 2 || v.ra > 3 * PI / 2) //looking right
+		{
+			v.rx = (int) g->p.x + 1;
+			v.ry = (g->p.x - v.rx) * v.atan + g->p.y;
+			v.xo = 1;
+			v.yo = -v.xo * v.atan;
+		}
+		if (v.ra == PI / 2 || v.ra == 4.71238899f)
+		{
+			v.rx = g->p.x;
+			v.ry = g->p.y;
+			v.dof = 8;
+		}
+		while_dof(g, &v);
+		draw_map_ray(g, &v);
+	}
 }
 
 void	draw_minimap(t_game *g)
@@ -99,5 +175,6 @@ void	draw_minimap(t_game *g)
 	}
 	draw_player(g);
 	ray_cast(g);
+	printf("%f\n", g->p.angle);
 	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
 }
