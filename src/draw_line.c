@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 16:19:05 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 08:37:08 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/13 15:38:36 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ void	draw_line2(t_vars *v, t_point o, t_point i, int color)
 {
 	while (1)
 	{
-		my_mlx_pixel_put(&v->g->img, o.x, o.y, color);
+		if ((o.x < SCREEN_WIDTH) && (o.y < SCREEN_HEIGHT) && ! (o.x < 0
+				|| o.y < 0))
+			my_mlx_pixel_put(&v->g->img, o.x, o.y, color);
+		else
+			printf("Segfault prevented : drawing pixel outside of img !\n");
 		if (o.x == i.x && o.y == i.y)
 			break ;
 		v->e2 = 2 * v->error;
@@ -59,4 +63,16 @@ void	draw_line(t_game *g, t_point o, t_point i, int color)
 	v.error = v.dx + v.dy;
 	v.g = g;
 	draw_line2(&v, o, i, color);
+}
+
+//Other lines utils
+void	draw_map_ray(t_game *g, t_rvars *v)
+{
+	v->s.x = g->p.x * MMS;
+	v->s.y = g->p.y * MMS;
+	v->e.x = v->rx * MMS;
+	v->e.y = v->ry * MMS;
+	printf("sx:%d sy:%d ex:%d ey:%d", v->s.x, v->s.y, v->e.x, v->e.y);
+	fflush(stdout);
+	draw_line(g, v->s, v->e, 0x00ffffff);
 }
