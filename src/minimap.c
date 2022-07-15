@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/13 16:57:14 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/15 15:10:13 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,13 @@ void	while_dof(t_game *g, t_rvars *v)
 			v->rx += v->xo;
 			v->ry += v->yo;
 			v->dof += 1;
-			write(1, ".", 1);
 		}
 	}
+}
+
+float	dist(float ax, float ay, float bx, float by)
+{
+	return (sqrt(pow(bx - ax, 2) + pow(by - ay, 2)));
 }
 
 void	ray_cast(t_game *g)
@@ -122,7 +126,9 @@ void	ray_cast(t_game *g)
 			v.dof = 8;
 		}
 		while_dof(g, &v);
-		draw_map_ray(g, &v);
+		v.hx = v.rx;
+		v.hy = v.ry;
+		v.disH = dist(g->p.x, g->p.y, v.hx, v.hy);
 		//vertical lines
 		v.dof = 0;
 		v.atan = -tan(v.ra);
@@ -145,9 +151,23 @@ void	ray_cast(t_game *g)
 			v.rx = g->p.x;
 			v.ry = g->p.y;
 			v.dof = 8;
+			printf("FUCK\n");
 		}
 		while_dof(g, &v);
-		draw_map_ray(g, &v);
+		v.vx = v.rx;
+		v.vy = v.ry;
+		v.disV = dist(g->p.x, g->p.y, v.vx, v.vy);
+		if (v.ra == PI / 2 || v.ra == 4.71238899f)
+			v.disV = 1000000;
+		printf("disH:%f disV:%f vx:%f vy:%f hx:%f hy:%f px:%f py:%f \n", v.disH, v.disV, v.vx, v.vy, v.hx, v.hy, g->p.dx, g->p.dy);
+		if (v.disV < v.disH)
+			draw_map_ray(g, &v, 0x00ffaa00);
+		else
+		{
+			v.rx = v.hx;
+			v.ry = v.hy;
+			draw_map_ray(g, &v, 0x0000aaff);
+		}
 	}
 }
 
@@ -175,6 +195,6 @@ void	draw_minimap(t_game *g)
 	}
 	draw_player(g);
 	ray_cast(g);
-	printf("%f\n", g->p.angle);
+	printf("pa: %f\n", g->p.angle);
 	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
 }
