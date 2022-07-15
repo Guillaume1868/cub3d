@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/15 15:10:13 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/15 15:15:56 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ void	ray_cast(t_game *g)
 			v.rx = g->p.x;
 			v.ry = g->p.y;
 			v.dof = 8;
-			printf("FUCK\n");
 		}
 		while_dof(g, &v);
 		v.vx = v.rx;
