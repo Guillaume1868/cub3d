@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 14:03:33 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/18 15:17:53 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	void		*win2;
 	char		*map;
 	t_data		img;
+	t_data		img2;
 	int			map_width;
 	int			map_height;
 	t_player	p;
