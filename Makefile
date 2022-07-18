@@ -1,6 +1,6 @@
 NAME 	=	cub3D
 
-FILES	=	main minimap pixel_put draw_line move raycast utils
+FILES	=	main minimap pixel_put draw_line move raycast utils 3d
 
 SRC		=	$(addprefix src/, $(FILES:$(FILE_EXTENSION)=.c))
 OBJ		= $(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})

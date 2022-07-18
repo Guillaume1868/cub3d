@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 15:02:38 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/18 18:24:42 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	draw_square(t_coord c, int color, t_game *g)
 	}
 }
 
+void	clear_image(t_game *g, int x, int y);
+
 void	draw_minimap(t_game *g)
 {
 	int		x;
@@ -94,6 +96,7 @@ void	draw_minimap(t_game *g)
 	}
 	draw_player(g);
 	ray_cast(g);
-	printf("pa: %f\n", g->p.angle);
 	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
+	mlx_put_image_to_window(g->mlx, g->win2, g->img2.img, 0, 0);
+	clear_image(g, 1920, 1080);
 }

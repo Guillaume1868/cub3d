@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:21 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 14:44:39 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/18 17:55:29 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ typedef struct s_rvars
 	float	vy;
 	float	dish;
 	float	disv;
+	float	dist;
 	t_point	s;
 	t_point	e;
 }				t_rvars;
+
+void	draw_column(t_game *g, t_rvars *v, int color);
 
 #endif
