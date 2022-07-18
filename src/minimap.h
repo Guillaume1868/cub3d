@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:21 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/13 16:48:24 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/18 14:44:39 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define MMS 64
 
 void	draw_minimap(t_game *g);
+
+void	ray_cast(t_game *g);
 
 typedef struct s_vars2
 {
@@ -44,8 +46,8 @@ typedef struct s_rvars
 	float	hy;
 	float	vx;
 	float	vy;
-	float	disH;
-	float	disV;
+	float	dish;
+	float	disv;
 	t_point	s;
 	t_point	e;
 }				t_rvars;

@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/13 15:52:29 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/18 14:03:33 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define P3 4.71238898025
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+# define DR 0.0174533
 
 typedef struct s_coord
 {

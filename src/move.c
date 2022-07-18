@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:28:59 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/11 15:29:14 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/18 15:07:29 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	key_hook(int keycode, t_game *g)
 		move(g, 1);
 	else if (keycode == 0 && g->state == playing)
 	{
-		g->p.angle -= 0.1;
+		g->p.angle -= 2 * PI / 20;
 		if (g->p.angle < 0)
 			g->p.angle += 2 * PI;
 		g->p.dx = cos(g->p.angle) / 5;
@@ -57,7 +57,7 @@ int	key_hook(int keycode, t_game *g)
 		move(g, -1);
 	else if (keycode == 2 && g->state == playing)
 	{
-		g->p.angle += 0.1;
+		g->p.angle += 2 * PI / 20;
 		if (g->p.angle > 2 * PI)
 			g->p.angle -= 2 * PI;
 		g->p.dx = cos(g->p.angle) / 5;

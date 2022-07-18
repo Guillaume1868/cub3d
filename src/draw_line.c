@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 16:19:05 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/15 14:34:32 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/18 14:45:45 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	draw_line2(t_vars *v, t_point o, t_point i, int color)
 		if ((o.x < SCREEN_WIDTH) && (o.y < SCREEN_HEIGHT) && ! (o.x < 0
 				|| o.y < 0))
 			my_mlx_pixel_put(&v->g->img, o.x, o.y, color);
-		//else
-			//printf("Segfault prevented : drawing pixel outside of img !\n");
 		if (o.x == i.x && o.y == i.y)
 			break ;
 		v->e2 = 2 * v->error;
@@ -72,7 +70,5 @@ void	draw_map_ray(t_game *g, t_rvars *v, int color)
 	v->s.y = g->p.y * MMS;
 	v->e.x = v->rx * MMS;
 	v->e.y = v->ry * MMS;
-	//printf("sx:%d sy:%d ex:%d ey:%d", v->s.x, v->s.y, v->e.x, v->e.y);
-	fflush(stdout);
 	draw_line(g, v->s, v->e, color);
 }
