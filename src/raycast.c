@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:55 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 18:39:34 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/19 14:02:36 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	vertical_rays(t_rvars *v, t_game *g)
 	v->disv = dist(g->p.x, g->p.y, v->vx, v->vy);
 	if (v->ra == PI / 2 || v->ra == 4.71238899f)
 		v->disv = 1000000;
-	v->dist = v->dish;
+	v->dist = v->disv;
 }
 
 void	horizontal_rays2(t_rvars *v, t_game *g)
@@ -92,9 +92,10 @@ void	ray_cast(t_game *g)
 {
 	t_rvars	v;
 
-	v.ra = g->p.angle - DR * 540;
+	v.ra = g->p.angle - DR * 960;
 	v.r = -1;
-	while (++v.r < 1080)
+	printf("=========");
+	while (++v.r < 1920)
 	{
 		if (v.ra < 0)
 			v.ra += 2 * PI;
@@ -107,10 +108,14 @@ void	ray_cast(t_game *g)
 			v.rx = v.hx;
 			v.ry = v.hy;
 			v.dist = v.dish;
+			draw_map_ray(g, &v, 0x00ff00ff);
+			draw_column(g, &v, 0x00ff00ff);
 		}
-		draw_map_ray(g, &v, 0x00aaaaff);
-		printf("avant: %f\n", v.dist);
-		draw_column(g, &v, 0x00ffffff);
+		else
+		{
+			draw_map_ray(g, &v, 0x000000ff);
+			draw_column(g, &v, 0x000000ff);
+		}
 		v.ra += DR;
 	}
 }
