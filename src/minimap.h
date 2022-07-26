@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:21 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 17:55:29 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/19 13:35:15 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_rvars
 	float	dish;
 	float	disv;
 	float	dist;
+	char	hit;
 	t_point	s;
 	t_point	e;
 }				t_rvars;

@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:47:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 18:32:44 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/19 10:38:58 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	draw_column(t_game *g, t_rvars *v, int color)
 	lineh = (1080) / v->dist + 1.0f;
 	if (lineh > 1080)
 		lineh = 1080;
-	i = (1080 - 1 - lineh) / 2;
-	printf("i:%d", i);
+	i = (1080 - 1 - lineh) / 2 - 1;
+	printf("%f\n", v->dist);
 	while (++i < (1080 - 1 - lineh) / 2 + lineh)
 	{
 		put_pixels(g, v->r, i, color);
