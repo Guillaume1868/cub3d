@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:47:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/19 10:38:58 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/07/26 15:26:21 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ void	clear_image(t_game *g, int x, int y)
 
 void	draw_column(t_game *g, t_rvars *v, int color)
 {
-	float	lineh;
-	int		i;
+	float			lineh;
+	int				i;
+	float			ca;
 
-	v->dist = v->dist * cos(g->p.angle - v->ra);
-	lineh = (1080) / v->dist + 1.0f;
+	ca = g->p.angle - v->ra;
+	if (ca < 0)
+		ca += 2 * PI;
+	if (ca > 2 * PI)
+		ca -= 2 * PI;
+	v->dist = v->dist * cos(ca);
+	lineh = (1080) / v->dist;
 	if (lineh > 1080)
 		lineh = 1080;
 	i = (1080 - 1 - lineh) / 2 - 1;
