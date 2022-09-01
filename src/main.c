@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/01 12:00:03 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/01 12:27:50 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ int	clean(char *err_msg, t_game *g)
 
 t_game	*init(t_game *g)
 {
-	g->map = NULL;
 	g->state = starting;
-	g->map_height = MAPSIZE;
-	g->map_width = MAPSIZE;
+	g->map_height = g->map->max_row;
+	g->map_width = g->map->max_col;
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, g->map_width * MMS, g->map_height * MMS,
 			"cub3D: minimap");
 	g->win2 = mlx_new_window(g->mlx, 1920, 1080, "cub3D: game");
-	g->map->map = fakemap(g);
 	g->img.img = mlx_new_image(g->mlx, g->map_width * MMS, g->map_height * MMS);
 	g->img.addr = mlx_get_data_addr(g->img.img, &g->img.bits_per_pixel,
 			&g->img.line_length, &g->img.endian);
@@ -116,27 +114,26 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		init_map(&g);
-		printf("init_map\n");
 		init_textures(&g);
-		printf("init_textures\n");
 		ret = get_map(argv[1], &g);
 		printf("ret: %d\n", ret);
-		setup_map(&g);
+		if (ret == 1)
+		{
+			setup_map(&g);
+			init(&g);
+			g.state = playing;
+			draw_minimap(&g);
+			mlx_loop(g.mlx);
+		}
 	}
-	printf("tmp: %s\n", g.map->tmp);
-	printf("map: %s\n", g.map->map);
+	// printf("tmp: %s\n", g.map->tmp);
+	// printf("map: %s\n", g.map->map);
 	// printf("map + (34 * 5 + 0): %s\n", g.map->map + 170);
 	// printf("map + (34 * 13 + 0): %s\n", g.map->map + 442);
 	// printf("map[34 * 5 + 10]: %c\n", (char)g.map->map[34 * 5 + 9]);
-	printf("map width: %d\n", g.map->max_col);
-	printf("map height: %d\n", g.map->max_row);
+	// printf("map width: %d\n", g.map->max_col);
+	//printf("map height: %d\n", g.map->max_row);
 	//printf("%d\n", g.map->ceiling_color);
 	//printf("%d\n", g.map->floor_color);
 	return (ret);
-
-	
-	// init(&g);
-	// g.state = playing;
-	// draw_minimap(&g);
-	// mlx_loop(g.mlx);
 }

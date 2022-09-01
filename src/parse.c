@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/09/01 11:10:11 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/01 12:15:18 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +44,6 @@ int	open_file(char *file_name)
 	}
 	return (fd);
 }
-
-// void	set_map(int fd, char *map)
-// {
-// 	char	*tmp;
-// 	int		x;
-// 	int		y;
-// 	int		height;
-// 	int		width;
-
-// 	y = 0;
-// 	height = 0;
-// 	width = 0;
-// 	tmp = get_next_line(fd);
-// 	while (tmp != NULL)
-// 	{
-// 		x = 0;
-// 		while (tmp[x])
-// 		{
-// 			while (tmp[x] == ' ')
-// 				x++;
-// 			map[(y * width) + x] = tmp[x];
-// 			x++;
-// 		}
-// 		y++;
-// 		tmp = get_next_line(fd);
-// 	}
-// }
 
 void	parse_map(t_game *game, char *line)
 {
