@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:28:59 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 15:07:29 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/01 11:57:20 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	move(t_game *g, int i)
 		return ;
 	if (x >= g->map_width || y >= g->map_height)
 		return ;
-	if (g->map[(int) x + (int) y * g->map_width] == '1')
+	if (g->map->map[(int) x + (int) y * g->map_width] == '1')
 		return ;
 	g->p.x = x;
 	g->p.y = y;
@@ -64,7 +64,7 @@ int	key_hook(int keycode, t_game *g)
 		g->p.dy = sin(g->p.angle) / 5;
 	}
 	else if (keycode == 53)
-		clean(g);
+		clean(NULL, g);
 	draw_minimap(g);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 18:21:13 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/01 11:38:03 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ char	*fakemap(t_game *g)
 	return (map);
 }
 
-int	clean(t_game *g)
+int	clean(char *err_msg, t_game *g)
 {
+	if (err_msg)
+		printf("%s", err_msg);
 	free(g->map);
+	free(g->textures);
 	mlx_destroy_window(g->mlx, g->win);
 	exit (0);
 }
@@ -72,12 +75,68 @@ t_game	*init(t_game *g)
 	return (g);
 }
 
-int	main(void)
+void	setup_map(t_game *g)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	g->map->map = malloc(g->map->max_col * g->map->max_row);
+	if (g->map->map != NULL)
+	{
+		i = 0;
+		k = 0;
+		while (i < g->map->max_row)
+		{
+			j = 0;
+			while (j < g->map->max_col)
+			{
+				if (g->map->tmp[k] == '\n' || g->map->tmp[k] == 0)
+				{
+					k++;
+					break ;
+				}
+				g->map->map[g->map->max_col * i + j] = g->map->tmp[k];
+				j++;
+				k++;
+			}
+			i++;
+		}
+	}
+}
+
+int	main(int argc, char *argv[])
 {
 	t_game	g;
+	int 	ret;
+	// int x;
+	// x = open("./src/textures/grass.xpm", O_RDONLY);
+	// printf("open: %d\n", x);
+	ret = -1;
+	if (argc == 2)
+	{
+		init_map(&g);
+		printf("init_map\n");
+		init_textures(&g);
+		printf("init_textures\n");
+		ret = get_map(argv[1], &g);
+		printf("ret: %d\n", ret);
+		setup_map(&g);
+	}
+	printf("tmp: %s\n", g.map->tmp);
+	printf("map: %s\n", g.map->map);
+	// printf("map + (34 * 5 + 0): %s\n", g.map->map + 170);
+	// printf("map + (34 * 13 + 0): %s\n", g.map->map + 442);
+	// printf("map[34 * 5 + 10]: %c\n", (char)g.map->map[34 * 5 + 9]);
+	printf("map width: %d\n", g.map->max_col);
+	printf("map height: %d\n", g.map->max_row);
+	//printf("%d\n", g.map->ceiling_color);
+	//printf("%d\n", g.map->floor_color);
+	return (ret);
 
-	init(&g);
-	g.state = playing;
-	draw_minimap(&g);
-	mlx_loop(g.mlx);
+	
+	// init(&g);
+	// g.state = playing;
+	// draw_minimap(&g);
+	// mlx_loop(g.mlx);
 }

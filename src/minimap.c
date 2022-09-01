@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 18:24:42 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/01 11:57:41 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ void	draw_minimap(t_game *g)
 		{
 			c.x = x;
 			c.y = y;
-			if (g->map[x + y * g->map_width] == '1')
+			if (g->map->map[x + y * g->map_width] == '1')
 				draw_square(c, 0x0000ff00, g);
-			if (g->map[x + y * g->map_width] == '0')
+			if (g->map->map[x + y * g->map_width] == '0')
 				draw_square(c, 0x00ff0000, g);
-			if (g->map[x + y * g->map_width] == 'N')
+			if (g->map->map[x + y * g->map_width] == 'N')
 				draw_square(c, 0x000000ff, g);
 		}
 	}

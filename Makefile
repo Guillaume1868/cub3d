@@ -1,9 +1,10 @@
 NAME 	=	cub3D
 
-FILES	=	main minimap pixel_put draw_line move raycast utils 3d
+FILES	=	main minimap pixel_put draw_line move raycast utils 3d parse parse_utils utils2 init ft_strtrim gnl/get_next_line gnl/get_next_line_utils
 
 SRC		=	$(addprefix src/, $(FILES:$(FILE_EXTENSION)=.c))
-OBJ		= $(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
+OBJ		=	$(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
+_INC	=	-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 INC		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 CC		=	gcc
 
