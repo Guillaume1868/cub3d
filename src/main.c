@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/01 11:38:03 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/01 12:00:03 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_game	*init(t_game *g)
 	g->win = mlx_new_window(g->mlx, g->map_width * MMS, g->map_height * MMS,
 			"cub3D: minimap");
 	g->win2 = mlx_new_window(g->mlx, 1920, 1080, "cub3D: game");
-	g->map = fakemap(g);
+	g->map->map = fakemap(g);
 	g->img.img = mlx_new_image(g->mlx, g->map_width * MMS, g->map_height * MMS);
 	g->img.addr = mlx_get_data_addr(g->img.img, &g->img.bits_per_pixel,
 			&g->img.line_length, &g->img.endian);
