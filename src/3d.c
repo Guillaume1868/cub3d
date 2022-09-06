@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3d.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:47:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/26 15:26:21 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/01 12:49:48 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_column(t_game *g, t_rvars *v, int color)
 	if (lineh > 1080)
 		lineh = 1080;
 	i = (1080 - 1 - lineh) / 2 - 1;
-	printf("%f\n", v->dist);
+	//printf("%f\n", v->dist);
 	while (++i < (1080 - 1 - lineh) / 2 + lineh)
 	{
 		put_pixels(g, v->r, i, color);

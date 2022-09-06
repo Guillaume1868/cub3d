@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/01 12:27:50 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/06 13:40:52 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ t_game	*init(t_game *g)
 	g->state = starting;
 	g->map_height = g->map->max_row;
 	g->map_width = g->map->max_col;
+	printf("map_h: %d\n", g->map_height);
+	printf("map_w: %d\n", g->map_width);
+	g->p.angle = 3 * PI / 2;
+	g->p.x = 3.5;
+	g->p.y = 5.5;
+	g->p.dx = cos(g->p.angle) / 5;
+	g->p.dy = sin(g->p.angle) / 5;
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, g->map_width * MMS, g->map_height * MMS,
 			"cub3D: minimap");

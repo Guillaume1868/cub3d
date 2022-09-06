@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/09/01 12:15:18 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/06 13:42:27 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	parse_map(t_game *game, char *line)
 		}
 		i++;
 	}
+	line[i - 1] = 0;
 	if (game->map->max_col < (int)ft_strlen(line))
 		game->map->max_col = (int)ft_strlen(line);
 	game->map->tmp = ft_strjoin(game->map->tmp, line);
