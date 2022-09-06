@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/06 13:40:52 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/06 15:23:13 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,23 @@ char	*fakemap(t_game *g)
 int	clean(char *err_msg, t_game *g)
 {
 	if (err_msg)
-		printf("%s", err_msg);
-	free(g->map);
-	free(g->textures);
-	mlx_destroy_window(g->mlx, g->win);
+		printf("Error\n%s\n", err_msg);
+	if (g->map->map)
+		free(g->map->map);
+	if (g->map)
+		free(g->map);
+	if (g->textures)
+		free(g->textures);
+	if (g->win)
+		mlx_destroy_window(g->mlx, g->win);
 	exit (0);
 }
 
 t_game	*init(t_game *g)
 {
 	g->state = starting;
+	if (!g->map->map_started)
+		clean("No valid map", g);
 	g->map_height = g->map->max_row;
 	g->map_width = g->map->max_col;
 	printf("map_h: %d\n", g->map_height);
@@ -108,6 +115,7 @@ void	setup_map(t_game *g)
 			i++;
 		}
 	}
+	free(g->map->tmp);
 }
 
 int	main(int argc, char *argv[])
@@ -121,7 +129,7 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		init_map(&g);
-		init_textures(&g);
+		//init_textures(&g);
 		ret = get_map(argv[1], &g);
 		printf("ret: %d\n", ret);
 		if (ret == 1)
