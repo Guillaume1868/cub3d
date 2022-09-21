@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/01 11:47:24 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/09 12:52:48 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdio.h>
 # include <errno.h>
 # include <printf.h>
+#include <sys/types.h>
+#include <sys/uio.h>
 # include "../mlx/mlx.h"
 # define PI 3.1415926535
 # define P2 1.57079632675
@@ -129,5 +131,6 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 void	init_map(t_game *g);
 void	init_textures(t_game *g);
+void	check_borders(t_game *g);
 
 #endif

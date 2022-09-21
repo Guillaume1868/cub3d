@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/09/06 15:02:48 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/21 09:16:40 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static int	check_map_name(char *str)
 int	open_file(char *file_name, t_game *g)
 {
 	int		fd;
-	int		ret;
-	char	c;
 
 	if (!check_map_name(file_name))
 		clean("Map extension is incorrect. (.cub)", g);
@@ -41,9 +39,6 @@ int	open_file(char *file_name, t_game *g)
 		perror("Error");
 		return (fd);
 	}
-	ret = read(fd, &c, 1);
-	if (ret == -1 || ret == 0)
-		clean("Map is empty", g);
 	return (fd);
 }
 
@@ -58,11 +53,13 @@ void	parse_map(t_game *game, char *line)
 		if (ft_strchr("01NSEW 	\n", line[i]) == NULL)
 		{
 			printf("line: %s\n", line);
+			free(line);
 			clean("Invalid char inside map", game);
 		}
 		i++;
 	}
-	line[i - 1] = 0;
+	if (line[i - 1] == '\n')
+		line[i - 1] = 0;
 	if (game->map->max_col < (int)ft_strlen(line))
 		game->map->max_col = (int)ft_strlen(line);
 	game->map->tmp = ft_strjoin(game->map->tmp, line);

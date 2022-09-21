@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/06 15:23:13 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/08 12:28:32 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int	main(int argc, char *argv[])
 		if (ret == 1)
 		{
 			setup_map(&g);
+			check_borders(&g);
 			init(&g);
 			g.state = playing;
 			draw_minimap(&g);
