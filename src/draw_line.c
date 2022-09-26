@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 16:19:05 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 14:45:45 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 13:39:45 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ void	draw_line(t_game *g, t_point o, t_point i, int color)
 }
 
 //Other lines utils
-void	draw_map_ray(t_game *g, t_rvars *v, int color)
+void	draw_map_ray(t_game *g, t_ray *v, int color)
 {
-	v->s.x = g->p.x * MMS;
-	v->s.y = g->p.y * MMS;
-	v->e.x = v->rx * MMS;
-	v->e.y = v->ry * MMS;
-	draw_line(g, v->s, v->e, color);
+	t_point	s;
+	t_point	e;
+
+	s.x = v->rx * MMS;
+	s.y = v->ry * MMS;
+	e.x = g->p.x * MMS;
+	e.y = g->p.y * MMS;
+	draw_line(g, s, e, color >> 2);
 }

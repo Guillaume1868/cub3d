@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3d.c                                               :+:      :+:    :+:   */
+/*   threed.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:47:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/26 15:26:21 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 11:27:34 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	clear_image(t_game *g, int x, int y)
 	}
 }
 
-void	draw_column(t_game *g, t_rvars *v, int color)
+void	draw_column(t_game *g, t_ray *v, int color, int idx)
 {
 	float			lineh;
 	int				i;
@@ -52,9 +52,6 @@ void	draw_column(t_game *g, t_rvars *v, int color)
 	if (lineh > 1080)
 		lineh = 1080;
 	i = (1080 - 1 - lineh) / 2 - 1;
-	printf("%f\n", v->dist);
 	while (++i < (1080 - 1 - lineh) / 2 + lineh)
-	{
-		put_pixels(g, v->r, i, color);
-	}
+		put_pixels(g, idx, i, color);
 }

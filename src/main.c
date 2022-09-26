@@ -6,13 +6,14 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 18:21:13 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 13:46:58 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
 #include "move.h"
+#include "draw_all.h"
 #include <math.h>
 #define MAPSIZE 10
 
@@ -41,6 +42,7 @@ char	*fakemap(t_game *g)
 	return (map);
 }
 
+//TODO: check no bad
 int	clean(t_game *g)
 {
 	free(g->map);
@@ -69,6 +71,9 @@ t_game	*init(t_game *g)
 	mlx_hook(g->win, 17, 0, clean, g);
 	mlx_key_hook(g->win2, key_hook, g);
 	mlx_hook(g->win2, 17, 0, clean, g);
+	g->rays = (t_ray *)malloc(sizeof(t_ray) * 1920);
+	if (g->rays == NULL)
+		exit(0);//TODO:change malloc protect
 	return (g);
 }
 
@@ -78,6 +83,6 @@ int	main(void)
 
 	init(&g);
 	g.state = playing;
-	draw_minimap(&g);
+	draw_all(&g);
 	mlx_loop(g.mlx);
 }

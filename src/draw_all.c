@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   draw_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 15:02:09 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/16 16:00:44 by gaubert          ###   ########.fr       */
+/*   Created: 2022/09/26 13:43:08 by gaubert           #+#    #+#             */
+/*   Updated: 2022/09/26 13:47:22 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "main.h"
+#include "threed.h"
+#include "minimap.h"
 
-# include "minimap.h"
-
-float	dist(float ax, float ay, float bx, float by);
-void	while_dof(t_game *g, t_rvars *v, char is_vertical);
-void	store_ray(t_game *g, t_rvars *v);
-void	anti_bad(t_ray *rays);
-#endif
+void	draw_all(t_game *g)
+{
+	draw_minimap(g);
+	ray_cast(g);
+	draw_rays(g);
+	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
+	mlx_put_image_to_window(g->mlx, g->win2, g->img2.img, 0, 0);
+	clear_image(g, 1920, 1080);
+}

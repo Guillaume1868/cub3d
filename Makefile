@@ -1,6 +1,7 @@
 NAME 	=	cub3D
 
-FILES	=	main minimap pixel_put draw_line move raycast utils 3d
+FILES	=	main minimap pixel_put draw_line move raycast utils threed draw_all\
+			while_dof
 
 SRC		=	$(addprefix src/, $(FILES:$(FILE_EXTENSION)=.c))
 OBJ		= $(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
@@ -31,7 +32,7 @@ clean:
 	@ $(RM) $(OBJ)
 	@printf "$(_INFO) $(OBJ) removed.\n"
 fclean: clean
-	@ $(MAKE) clean -C mlx
+	# @ $(MAKE) clean -C mlx
 	@ $(RM) $(NAME)
 	@printf "$(_INFO) $(NAME) removed.\n"
 re: fclean all

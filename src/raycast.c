@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:55 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/19 14:02:36 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 13:48:00 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	vertical_rays(t_rvars *v, t_game *g)
 	v->dof = 0;
 	v->atan = -tan(v->ra);
 	vertical_rays2(v, g);
-	while_dof(g, v);
+	while_dof(g, v, 1);
 	v->vx = v->rx;
 	v->vy = v->ry;
 	v->disv = dist(g->p.x, g->p.y, v->vx, v->vy);
@@ -82,7 +82,7 @@ void	horizontal_rays(t_rvars *v, t_game *g)
 	v->dof = 0;
 	v->atan = -1 / tan(v->ra);
 	horizontal_rays2(v, g);
-	while_dof(g, v);
+	while_dof(g, v, 0);
 	v->hx = v->rx;
 	v->hy = v->ry;
 	v->dish = dist(g->p.x, g->p.y, v->hx, v->hy);
@@ -94,7 +94,6 @@ void	ray_cast(t_game *g)
 
 	v.ra = g->p.angle - DR * 960;
 	v.r = -1;
-	printf("=========");
 	while (++v.r < 1920)
 	{
 		if (v.ra < 0)
@@ -108,14 +107,11 @@ void	ray_cast(t_game *g)
 			v.rx = v.hx;
 			v.ry = v.hy;
 			v.dist = v.dish;
-			draw_map_ray(g, &v, 0x00ff00ff);
-			draw_column(g, &v, 0x00ff00ff);
+			v.hit = v.hith;
 		}
 		else
-		{
-			draw_map_ray(g, &v, 0x000000ff);
-			draw_column(g, &v, 0x000000ff);
-		}
+			v.hit = v.hitv;
+		store_ray(g, &v);
 		v.ra += DR;
 	}
 }

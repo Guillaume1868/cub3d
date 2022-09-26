@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 18:34:20 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/16 14:02:23 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ typedef struct s_data
 
 typedef enum e_state {starting, playing, won, lost}	t_state;
 
+typedef struct s_ray
+{
+	int		mp;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	dist;
+	char	hit;
+}				t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -69,6 +79,7 @@ typedef struct s_game
 	int			map_height;
 	t_player	p;
 	t_state		state;
+	t_ray		*rays;
 }				t_game;
 
 int	clean(t_game *g);

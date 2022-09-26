@@ -6,14 +6,16 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 18:24:42 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 14:03:42 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include "utils.h"
 #include "minimap.h"
 #include "pixel_put.h"
 #include "draw_line.h"
+#include "threed.h"
 #include <math.h>
 
 void	draw_player(t_game *g)
@@ -70,8 +72,6 @@ void	draw_square(t_coord c, int color, t_game *g)
 	}
 }
 
-void	clear_image(t_game *g, int x, int y);
-
 void	draw_minimap(t_game *g)
 {
 	int		x;
@@ -95,8 +95,32 @@ void	draw_minimap(t_game *g)
 		}
 	}
 	draw_player(g);
-	ray_cast(g);
-	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
-	mlx_put_image_to_window(g->mlx, g->win2, g->img2.img, 0, 0);
-	clear_image(g, 1920, 1080);
+}
+
+void	put_ray_to_win(t_game *g)
+{
+	int	column;
+	int	color;
+
+	color = 0;
+	column = 0;
+	while (++column < 1920)
+	{
+		if (g->rays[column].hit == 'S')
+			color = 0x00ff0000;
+		else if (g->rays[column].hit == 'N')
+			color = 0x0000ff00;
+		else if (g->rays[column].hit == 'W')
+			color = 0x000000ff;
+		else
+			color = 0x0000ffff;
+		draw_column(g, &g->rays[column], color, column);
+		draw_map_ray(g, &g->rays[column], color);
+	}
+}
+
+void	draw_rays(t_game *g)
+{
+	anti_bad(g->rays);
+	put_ray_to_win(g);
 }

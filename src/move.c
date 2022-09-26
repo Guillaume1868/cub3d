@@ -6,13 +6,14 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:28:59 by gaubert           #+#    #+#             */
-/*   Updated: 2022/07/18 15:07:29 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 14:04:54 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
 #include <math.h>
+#include "draw_all.h"
 
 void	move(t_game *g, int i)
 {
@@ -65,6 +66,6 @@ int	key_hook(int keycode, t_game *g)
 	}
 	else if (keycode == 53)
 		clean(g);
-	draw_minimap(g);
+	draw_all(g);
 	return (0);
 }

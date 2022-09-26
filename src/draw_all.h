@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   draw_all.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 15:02:09 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/16 16:00:44 by gaubert          ###   ########.fr       */
+/*   Created: 2022/09/26 13:44:54 by gaubert           #+#    #+#             */
+/*   Updated: 2022/09/26 13:50:09 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef DRAW_ALL_H
+# define DRAW_ALL_H
 
-# include "minimap.h"
+# include "main.h"
 
-float	dist(float ax, float ay, float bx, float by);
-void	while_dof(t_game *g, t_rvars *v, char is_vertical);
-void	store_ray(t_game *g, t_rvars *v);
-void	anti_bad(t_ray *rays);
+void	draw_all(t_game *g);
 #endif
