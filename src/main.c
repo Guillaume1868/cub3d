@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 13:46:58 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:36:59 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,17 @@ char	*fakemap(t_game *g)
 			map[i] = '0';
 	}
 	map[13] = '1';
+	map[42] = '1';
 	map[23] = 'N';
 	g->p.angle = 3 * PI / 2;
 	g->p.x = 3.5;
 	g->p.y = 5.5;
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
+	load_texture(g, &g->img_s, "./img/okaucnuy.xpm");
+	load_texture(g, &g->img_n, "./img/okaukys.xpm");
+	load_texture(g, &g->img_e, "./img/okau.xpm");
+	load_texture(g, &g->img_w, "./img/koron.xpm");
 	return (map);
 }
 

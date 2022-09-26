@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/16 14:02:23 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:54:07 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define DR 0.0004848
+# include "textures.h"
 
 typedef struct s_coord
 {
@@ -80,8 +81,14 @@ typedef struct s_game
 	t_player	p;
 	t_state		state;
 	t_ray		*rays;
+	t_image		img_n;
+	t_image		img_s;
+	t_image		img_e;
+	t_image		img_w;
 }				t_game;
 
-int	clean(t_game *g);
+int		clean(t_game *g);
+
+void	load_texture(t_game *g, t_image *i, char *file);
 
 #endif
