@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:03:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 13:49:08 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 14:58:42 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	anti_bad(t_ray *rays)
 		if (rays[column].dist >= rays[column + 1].dist && \
 			rays[column].dist >= rays[column - 1].dist)
 		{
-			rays[column].dist = (rays[column + 1].dist + \
-				rays[column - 1].dist) / 2;
-			rays[column].rx = rays[column +1].rx;
-			rays[column].ry = rays[column +1].ry;
+			rays[column].dist = rays[column + 1].dist;
+			rays[column].rx = rays[column + 1].rx;
+			rays[column].ry = rays[column + 1].ry;
+			rays[column].hit = rays[column + 1].hit;
 		}
 	}
 }
