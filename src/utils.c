@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:03:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 14:58:42 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/26 16:10:51 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,15 @@ void	anti_bad(t_ray *rays)
 	column = 0;
 	while (++column < 1919)
 	{
-		if (rays[column - 1].hit == 'W' && \
-		rays[column + 1].hit == 'S' \
-			&& rays[column].hit != rays[column - 1].hit)
-			rays[column].hit = rays[column - 1].hit;
 		if (rays[column - 1].hit == rays[column + 1].hit
 			&& rays[column].hit != rays[column - 1].hit)
-			rays[column].hit = rays[column - 1].hit;
-		if (rays[column].dist >= rays[column + 1].dist && \
-			rays[column].dist >= rays[column - 1].dist)
+			rays[column].hit = rays[column + 1].hit;
+		if (rays[column].dist - 0.1 >= rays[column + 1].dist && \
+			rays[column].dist - 0.1 >= rays[column - 1].dist)
 		{
 			rays[column].dist = rays[column + 1].dist;
 			rays[column].rx = rays[column + 1].rx;
 			rays[column].ry = rays[column + 1].ry;
-			rays[column].hit = rays[column + 1].hit;
 		}
 	}
 }
