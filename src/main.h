@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/09 12:52:48 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/22 13:07:28 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_player
 	float		dx;
 	float		dy;
 	float		angle;
+	int			is_player;
 }				t_player;
 
 typedef struct s_point

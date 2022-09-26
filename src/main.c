@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/08 12:28:32 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/22 13:41:03 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ t_game	*init(t_game *g)
 	g->map_width = g->map->max_col;
 	printf("map_h: %d\n", g->map_height);
 	printf("map_w: %d\n", g->map_width);
-	g->p.angle = 3 * PI / 2;
-	g->p.x = 3.5;
-	g->p.y = 5.5;
+	//g->p.angle = 2 * PI / 2;
+	g->p.x += .5;
+	g->p.y += .5;
+	printf("p.x = %f\n", g->p.x);
+	printf("p.y = %f\n", g->p.y);
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
 	g->mlx = mlx_init();
@@ -118,6 +120,14 @@ void	setup_map(t_game *g)
 	free(g->map->tmp);
 }
 
+void	check_player(t_game *g)
+{
+	if (g->p.is_player == 0)
+		clean("No player found", g);
+	else if (g->p.is_player > 1)
+		clean("Multiple players found", g);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_game	g;
@@ -134,8 +144,9 @@ int	main(int argc, char *argv[])
 		printf("ret: %d\n", ret);
 		if (ret == 1)
 		{
+			check_player(&g);
 			setup_map(&g);
-			check_borders(&g);
+			//check_borders(&g);
 			init(&g);
 			g.state = playing;
 			draw_minimap(&g);

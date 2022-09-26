@@ -6,7 +6,7 @@
 /*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:46:23 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/09/01 11:09:39 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/22 13:04:47 by lucas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_map(t_game *g)
 	g->map->max_col = 0;
 	g->map->floor_color = -1;
 	g->map->ceiling_color = -1;
+	g->p.is_player = 0;
 }
 
 void	init_textures(t_game *g)
