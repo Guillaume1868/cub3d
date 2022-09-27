@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:21 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 13:47:40 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/27 14:00:20 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ typedef struct s_rvars
 	t_point	e;
 }				t_rvars;
 
-void	draw_column(t_game *g, t_ray *v, int color, int idx);
+void	draw_column(t_game *g, t_ray *v, int idx);
 
 #endif

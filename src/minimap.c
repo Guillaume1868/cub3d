@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:12:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 15:56:55 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:04:43 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	put_ray_to_win(t_game *g)
 			color = 0x000000ff;
 		else
 			color = 0x0000ffff;
-		draw_column(g, &g->rays[column], color, column);
+		draw_column(g, &g->rays[column], column);
 		draw_map_ray(g, &g->rays[column], color);
 	}
 }

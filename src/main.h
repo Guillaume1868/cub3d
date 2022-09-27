@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 15:54:07 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/27 14:04:33 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ typedef struct s_ray
 	char	hit;
 }				t_ray;
 
+typedef struct s_range
+{
+	int		min;
+	int		max;
+	int		i;
+}				t_range;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -85,6 +92,8 @@ typedef struct s_game
 	t_image		img_s;
 	t_image		img_e;
 	t_image		img_w;
+	int			sky_color;
+	int			floor_color;
 }				t_game;
 
 int		clean(t_game *g);

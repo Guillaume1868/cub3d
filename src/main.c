@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 15:36:59 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/27 12:22:29 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	*fakemap(t_game *g)
 	load_texture(g, &g->img_n, "./img/okaukys.xpm");
 	load_texture(g, &g->img_e, "./img/okau.xpm");
 	load_texture(g, &g->img_w, "./img/koron.xpm");
+	g->sky_color = 0x005050ff;
+	g->floor_color = 0x00afafaf;
 	return (map);
 }
 

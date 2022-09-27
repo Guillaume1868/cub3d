@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   put_wall.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:34:25 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/27 12:36:33 by gaubert          ###   ########.fr       */
+/*   Created: 2022/09/27 16:07:39 by gaubert           #+#    #+#             */
+/*   Updated: 2022/09/27 16:08:40 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-#include "textures.h"
+#ifndef PUT_WALL_H
+# define PUT_WALL_H
+# include "main.h"
 
-void	load_texture(t_game *g, t_image *i, char *file)
-{
-	i->img = mlx_xpm_file_to_image(g->mlx, file, &i->width,
-			&i->height);
-	if (!i->img)
-		return ; //TODO:better malloc protection
-	i->addr = mlx_get_data_addr(i->img, &i->bits_per_pixel,
-			&i->line_length, &i->endian);
-}
+void	put_wall(t_game *g, t_ray *v, int idx, t_range r);
+#endif
