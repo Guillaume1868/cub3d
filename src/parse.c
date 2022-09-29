@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/09/22 13:32:52 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/29 17:03:18 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int	open_file(char *file_name, t_game *g)
 	return (fd);
 }
 
-void	init_player(t_game *g, char c, int x, int y)
+void	init_player(t_game *g, char c, int x, int *y)
 {
 	g->p.is_player++;
+	printf("x: %d | y: %d\n", x, *y);
 	g->p.x = x;
-	g->p.y = y;
+	g->p.y = *y;
 	(void) c;
 	if (c == 'S')
 		g->p.angle = 1 * PI / 2;
@@ -58,7 +59,7 @@ void	init_player(t_game *g, char c, int x, int y)
 		g->p.angle = 4 * PI / 2;
 }
 
-void	parse_map(t_game *game, char *line, int y)
+void	parse_map(t_game *game, char *line, int *y)
 {
 	int		i;
 
@@ -76,15 +77,17 @@ void	parse_map(t_game *game, char *line, int y)
 			init_player(game, line[i], i, y);
 		i++;
 	}
-	if (line[i - 1] == '\n')
-		line[i - 1] = 0;
+	//if (line[i - 1] == '\n')
+	//	line[i - 1] = 0;
+	*y+=1;
 	if (game->map->max_col < (int)ft_strlen(line))
 		game->map->max_col = (int)ft_strlen(line);
 	game->map->tmp = ft_strjoin(game->map->tmp, line);
 	game->map->max_row++;
+	//game->map->max_col--;
 }
 
-static void	parse_line(t_game *game, char *line, int i, int y)
+static void	parse_line(t_game *game, char *line, int i, int *y)
 {
 	while (ft_iswhitespace(line[i]))
 		i++;
@@ -122,13 +125,13 @@ int	get_map(char *file, t_game *game)
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
+		printf("y= %d\n", y);
 		if (!line)
 			break ;
 		else
-			parse_line(game, line, 0, y);
+			parse_line(game, line, 0, &y);
 		printf("%s\n", line);
 		free(line);
-		y++;
 	}
 	close (fd);
 	return (1);

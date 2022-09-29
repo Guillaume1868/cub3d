@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:05:29 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/08/29 13:29:57 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:29:54 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	calculate_color_from_rgb(int r, int g, int b)
 {
 	int	rgb;
 
+	rgb = 0;
 	rgb = r;
 	rgb = (rgb << 8) + g;
 	rgb = (rgb << 8) + b;

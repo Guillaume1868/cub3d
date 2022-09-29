@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/22 13:41:03 by lucas            ###   ########.fr       */
+/*   Updated: 2022/09/29 17:03:12 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	setup_map(t_game *g)
 	int	i;
 	int	j;
 	int	k;
-
-	g->map->map = malloc(g->map->max_col * g->map->max_row);
+	
+	g->map->map = malloc((g->map->max_col * g->map->max_row) + 1);
 	if (g->map->map != NULL)
 	{
 		i = 0;
@@ -105,19 +105,27 @@ void	setup_map(t_game *g)
 			j = 0;
 			while (j < g->map->max_col)
 			{
+				
 				if (g->map->tmp[k] == '\n' || g->map->tmp[k] == 0)
 				{
+					g->map->map[g->map->max_col * i + j] = 0;
+					printf("tmp[k]: %c\n", g->map->tmp[k]);
 					k++;
 					break ;
 				}
 				g->map->map[g->map->max_col * i + j] = g->map->tmp[k];
+				printf("g->map->map[%d * %d + %d]: %c | g->map->max_col * i + j: %d | g->map->tmp[%d]: %c\n", g->map->max_col, i, j, g->map->map[g->map->max_col * i + j], g->map->max_col * i + j, k, g->map->tmp[k]);
 				j++;
 				k++;
 			}
 			i++;
 		}
+		g->map->map[g->map->max_col * (i - 1) + j] = 0;
+		printf("g->map->map[g->map->max_col * %d + %d]: %d\n", (i - 1), j, g->map->map[g->map->max_col * (i - 1) + j]);
 	}
-	free(g->map->tmp);
+	printf("map: %s\n", g->map->map);
+	printf("tmp: %s\n", g->map->tmp);
+	//free(g->map->tmp);
 }
 
 void	check_player(t_game *g)
@@ -146,7 +154,7 @@ int	main(int argc, char *argv[])
 		{
 			check_player(&g);
 			setup_map(&g);
-			//check_borders(&g);
+			check_borders(&g);
 			init(&g);
 			g.state = playing;
 			draw_minimap(&g);
