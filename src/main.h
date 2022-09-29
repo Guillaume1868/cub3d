@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/27 14:04:33 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:35:39 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_range
 	int		min;
 	int		max;
 	int		i;
+	int		realh;
 }				t_range;
 
 typedef struct s_game

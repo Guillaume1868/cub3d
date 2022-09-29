@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:47:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/27 16:09:03 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:21:19 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	draw_column(t_game *g, t_ray *v, int idx)
 
 	remove_fisheye(g, v);
 	lineh = (1080) / v->dist;
+	r.realh = lineh;
 	if (lineh > 1080)
 		lineh = 1080;
 	r.i = -1;
@@ -67,7 +68,7 @@ void	draw_column(t_game *g, t_ray *v, int idx)
 		put_pixels(g, idx, j, g->sky_color);
 	while (r.min + ++r.i < r.max)
 		put_wall(g, v, idx, r);
-	r.i--;
+	r.i-=2;
 	while (r.min + ++r.i < 1080)
 		put_pixels(g, idx, r.min + r.i, g->floor_color);
 }
