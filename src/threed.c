@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:47:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/29 17:21:19 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/01 13:48:29 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	draw_column(t_game *g, t_ray *v, int idx)
 		put_pixels(g, idx, j, g->sky_color);
 	while (r.min + ++r.i < r.max)
 		put_wall(g, v, idx, r);
-	r.i-=2;
+	r.i -= 2;
 	while (r.min + ++r.i < 1080)
 		put_pixels(g, idx, r.min + r.i, g->floor_color);
 }
