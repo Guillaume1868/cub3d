@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:28:59 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/29 16:03:35 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/01 13:37:12 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include "minimap.h"
 #include <math.h>
 #include "draw_all.h"
+#include "keys.h"
+#include "raycast.h"
+
+int	check_wall(t_game *g, int i)
+{
+	t_rvars	v;
+
+	v.ra = g->p.angle;
+	if (i == -1)
+	{
+		v.ra += PI;
+		if (v.ra > 2 * PI)
+			v.ra -= 2 * PI;
+	}
+	horizontal_rays(&v, g);
+	vertical_rays(&v, g);
+	if (v.disv < 0.2 || v.dish < 0.2)
+		return (1);
+	return (0);
+}
 
 void	move(t_game *g, int i)
 {
@@ -36,7 +56,7 @@ void	move(t_game *g, int i)
 		return ;
 	if (x >= g->map_width || y >= g->map_height)
 		return ;
-	if (g->map[(int) x + (int) y * g->map_width] == '1')
+	if (check_wall(g, i))
 		return ;
 	g->p.x = x;
 	g->p.y = y;
@@ -55,27 +75,27 @@ void	rotate(t_game *g, float angle)
 
 int	key_hook(int keycode, t_game *g)
 {
-	if (keycode == 13 && g->state == playing)
+	if (keycode == K_W)
 		move(g, 1);
-	else if (keycode == 123 && g->state == playing)
+	else if (keycode == K_LEFT_ARROW)
 		rotate(g, -2 * PI / 20);
-	else if (keycode == 1 && g->state == playing)
+	else if (keycode == K_S)
 		move(g, -1);
-	else if (keycode == 124 && g->state == playing)
+	else if (keycode == K_RIGHT_ARROW)
 		rotate(g, 2 * PI / 20);
-	else if (keycode == 0 && g->state == playing)
+	else if (keycode == K_A)
 	{
 		rotate(g, -2 * PI / 4);
 		move(g, 1);
 		rotate(g, 2 * PI / 4);
 	}
-	else if (keycode == 2 && g->state == playing)
+	else if (keycode == K_D)
 	{
 		rotate(g, 2 * PI / 4);
 		move(g, 1);
 		rotate(g, -2 * PI / 4);
 	}
-	else if (keycode == 53)
+	else if (keycode == K_ESC)
 		clean(g);
 	draw_all(g);
 	return (0);
