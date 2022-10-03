@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/29 17:03:12 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:42:34 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	clean(char *err_msg, t_game *g)
 		free(g->map->map);
 	if (g->map)
 		free(g->map);
-	if (g->textures)
-		free(g->textures);
+	// if (g->textures)
+	// 	free(g->textures);
 	if (g->win)
 		mlx_destroy_window(g->mlx, g->win);
 	exit (0);
@@ -89,13 +89,40 @@ t_game	*init(t_game *g)
 	return (g);
 }
 
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	str = (char*)s;
+	if (n == 0)
+		return ;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void *ptr;
+
+	ptr = malloc(count * size);
+	if (ptr == NULL)
+		return (ptr);
+	ft_bzero(ptr, size * count);
+	return (ptr);
+}
+
 void	setup_map(t_game *g)
 {
 	int	i;
 	int	j;
 	int	k;
 	
-	g->map->map = malloc((g->map->max_col * g->map->max_row) + 1);
+	g->map->map = ft_calloc((g->map->max_col * g->map->max_row) + 1, sizeof(char));
 	if (g->map->map != NULL)
 	{
 		i = 0;
@@ -108,8 +135,6 @@ void	setup_map(t_game *g)
 				
 				if (g->map->tmp[k] == '\n' || g->map->tmp[k] == 0)
 				{
-					g->map->map[g->map->max_col * i + j] = 0;
-					printf("tmp[k]: %c\n", g->map->tmp[k]);
 					k++;
 					break ;
 				}
@@ -120,12 +145,8 @@ void	setup_map(t_game *g)
 			}
 			i++;
 		}
-		g->map->map[g->map->max_col * (i - 1) + j] = 0;
-		printf("g->map->map[g->map->max_col * %d + %d]: %d\n", (i - 1), j, g->map->map[g->map->max_col * (i - 1) + j]);
 	}
-	printf("map: %s\n", g->map->map);
-	printf("tmp: %s\n", g->map->tmp);
-	//free(g->map->tmp);
+	free(g->map->tmp);
 }
 
 void	check_player(t_game *g)
