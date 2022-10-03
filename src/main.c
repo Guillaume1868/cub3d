@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/27 12:22:29 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/03 14:57:53 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,37 @@ char	*fakemap(t_game *g)
 	g->p.y = 5.5;
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
-	load_texture(g, &g->img_s, "./img/okaucnuy.xpm");
-	load_texture(g, &g->img_n, "./img/okaukys.xpm");
-	load_texture(g, &g->img_e, "./img/okau.xpm");
-	load_texture(g, &g->img_w, "./img/koron.xpm");
+	load_texture(g, &g->img_s, "./img/east.xpm");
+	load_texture(g, &g->img_n, "./img/north.xpm");
+	load_texture(g, &g->img_e, "./img/tnt.xpm");
+	load_texture(g, &g->img_w, "./img/debug.xpm");
 	g->sky_color = 0x005050ff;
 	g->floor_color = 0x00afafaf;
 	return (map);
 }
 
-//TODO: check no bad
 int	clean(t_game *g)
 {
-	free(g->map);
-	mlx_destroy_window(g->mlx, g->win);
+	if (g->map != NULL)
+		free(g->map);
+	if (g->rays != NULL)
+		free(g->rays);
+	if (g->win != NULL)
+		mlx_destroy_window(g->mlx, g->win);
+	if (g->win2 != NULL)
+		mlx_destroy_window(g->mlx, g->win2);
+	// if (g->img_w.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_w);
+	// if (g->img_e.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_e);
+	// if (g->img_s.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_s);
+	// if (g->img_n.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_n);
+	// if (g->img.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img);
+	// if (g->img2.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img2);
 	exit (0);
 }
 
@@ -78,9 +95,9 @@ t_game	*init(t_game *g)
 	mlx_hook(g->win, 17, 0, clean, g);
 	mlx_key_hook(g->win2, key_hook, g);
 	mlx_hook(g->win2, 17, 0, clean, g);
-	g->rays = (t_ray *)malloc(sizeof(t_ray) * 1920);
+	g->rays = malloc(sizeof(t_ray) * 1920);
 	if (g->rays == NULL)
-		exit(0);//TODO:change malloc protect
+		clean(g);
 	return (g);
 }
 

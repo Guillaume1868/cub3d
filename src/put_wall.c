@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:07:09 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/01 13:39:26 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/03 15:17:33 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ void	put_wall(t_game *g, t_ray *v, int idx, t_range r)
 	t = get_texture(g, v);
 	wy = get_wall_y(v);
 	ty = wy * t->width;
-	bias = (r.realh - 1080) / 4;
+	bias = (r.realh - 1080) / 2 + 1;
 	if (bias < 0)
 		bias = 0;
-	tx = ((float)(r.i) + bias) / ((float)r.max
+	// tx = ((float)(r.i) + bias) / ((float)r.max
+	// 		- ((1080 - 1 - r.realh) / 2)) * t->height;
+	tx = ((float)(r.i) + bias) / ((float)((1080 - 1 - r.realh) / 2 + r.realh)
 			- ((1080 - 1 - r.realh) / 2)) * t->height;
 	put_pixels(g, idx, r.i + r.min,
 		*(int *)(t->addr + (t->line_length * tx)
