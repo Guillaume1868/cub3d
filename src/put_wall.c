@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:07:09 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/03 15:17:33 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/03 15:34:27 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ float	get_wall_y(t_ray *v)
 	return (v->ry - (int)v->ry);
 }
 
+float	mirror(t_ray *v, float wy)
+{
+	if (v->hit == 'S' || v->hit == 'W')
+		return -wy + 1;
+	return wy;
+}
+
 void	put_wall(t_game *g, t_ray *v, int idx, t_range r)
 {
 	t_image	*t;
@@ -44,6 +51,7 @@ void	put_wall(t_game *g, t_ray *v, int idx, t_range r)
 
 	t = get_texture(g, v);
 	wy = get_wall_y(v);
+	wy = mirror(v, wy);
 	ty = wy * t->width;
 	bias = (r.realh - 1080) / 2 + 1;
 	if (bias < 0)
