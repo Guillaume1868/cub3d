@@ -6,43 +6,87 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:03:21 by lucas             #+#    #+#             */
-/*   Updated: 2022/09/26 11:32:53 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:20:20 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./main.h"
 
-// static void	check_first_char(char *line, t_game *g)
-// {
-// 	int	i;
+static void	check_first_char(char *line, t_game *g)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (line[i])
-// 	{
-// 		if (line[i] == ' ')
-// 			i++;
-// 		if (line[i] == '1')
-// 			break ;
-// 		if (line[i] == '0')
-// 			clean("Map is not surrounded by walls first\n", g);
-// 	}
-// }
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			i++;
+		if (line[i] == '1')
+			break ;
+		if (line[i] == '0')
+			clean("Map is not surrounded by walls\n", g);
+	}
+}
 
-// static void	check_last_char(char *line, t_game *g)
-// {
-// 	int	i;
+static void	check_last_char(char *line, t_game *g)
+{
+	int	i;
 
-// 	i = g->map->max_col;
-// 	while (i > 0)
-// 	{
-// 		if (line[i] == ' ' || line[i] == '\0')
-// 			i--;
-// 		if (line[i] == '1')
-// 			break ;
-// 		if (line[i] == '0')
-// 			clean("Map is not surrounded by walls last\n", g);
-// 	}
-// }
+	i = g->map->max_col - 1;
+	while (i > 0)
+	{
+		if (line[i] == ' ' || line[i] == '\0')
+			i--;
+		if (line[i] == '1')
+			break ;
+		if (line[i] == '0')
+			clean("Map is not surrounded by walls\n", g);
+	}
+}
+
+static void	check_inside(char *line, t_game *g, int y)
+{
+	int		x;
+	char	*tmp;
+
+	x = 0;
+	tmp = NULL;
+	while (line[x])
+	{
+		if (line[x] == '0' || ft_strchr("NSEW", line[x]))
+		{
+			if (x - 1 < 0 || y - 1 < 0 || line[x - 1] == ' ' || line[x + 1] == ' ')
+				clean("Map is not surrounded by walls\n", g);
+			if (y > 0)
+			{
+				tmp = &g->map->map[g->map->max_col * (y - 1)];
+				if (tmp[x] == ' ')
+					clean("Map is not surrounded by walls\n", g);
+			}
+			if (y < g->map->max_row - 1)
+			{
+				tmp = &g->map->map[g->map->max_col * (y + 1)];
+				if (tmp[x] == ' ')
+					clean("Map is not surrounded by walls\n", g);
+			}
+		}
+		x++;
+	}
+}
+
+static void	check_last_row(char *line, t_game *g)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '1' || line[i] == ' ')
+			i++;
+		else
+			clean("Map is not surrounded by walls\n", g);
+	}
+}
 
 void	check_borders(t_game *g)
 {
@@ -55,8 +99,11 @@ void	check_borders(t_game *g)
 		line = &g->map->map[g->map->max_col * i];
 		printf("line[%d]: %s\n", i, line);
 		printf("max_col: %d\n", g->map->max_col);
-		//check_first_char(line, g);
-		//check_last_char(line, g);
+		check_first_char(line, g);
+		check_last_char(line, g);
+		check_inside(line, g, i);
 		i++;
 	}
+	line = &g->map->map[g->map->max_col * (g->map->max_row - 1)];
+	check_last_row(line, g);
 }
