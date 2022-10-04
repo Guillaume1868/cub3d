@@ -6,13 +6,13 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:05:29 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/09/26 14:29:54 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:36:51 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./main.h"
 
-void	parse_texture(t_game *game, t_data *img, char *line)
+void	parse_texture(t_game *game, char c, char *line)
 {
 	char	*path;
 	int		x;
@@ -22,27 +22,19 @@ void	parse_texture(t_game *game, t_data *img, char *line)
 	path = ft_strtrim(line, " ");
 	if (path == NULL)
 		clean("ft_strtrim failed\n", game);
-	x = ft_strlen(path);
-	if (x > 4 && (path[x - 4] != '.' || path[x - 3] != 'x'
-			|| path[x - 2] != 'p' || path[x - 1] != 'm'))
-		clean(".xpm extension needed\n", game);
-	else if (x < 4)
-		clean("Invalid texture path\n", game);
 	printf("path: %s\n", path);
 	x = open(path, O_RDONLY);
 	if (x < 0)
 		clean("opening xpm file failed\n", game);
-	img->img = mlx_xpm_file_to_image(game->mlx, \
-				path, &img->width, &img->height);
-	printf("0\n");
-	if (!img->img)
-		clean("xpm_to_image failed\n", game);
-	printf("1\n");
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
-			&img->line_length, &img->endian);
-	printf("2\n");
+	if (c == 'N')
+		game->textures->tex_n = ft_strdup(path);
+	else if (c == 'S')
+		game->textures->tex_s = ft_strdup(path);
+	else if (c == 'W')
+		game->textures->tex_w = ft_strdup(path);
+	else if (c == 'E')
+		game->textures->tex_e = ft_strdup(path);
 	game->textures->tex_num = game->textures->tex_num + 1;
-	printf("3\n");
 	free(path);
 	close(x);
 }

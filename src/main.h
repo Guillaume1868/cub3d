@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/04 12:23:27 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:36:29 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,11 @@ typedef enum e_state {starting, playing, won, lost}	t_state;
 
 typedef struct s_tex
 {
-	t_data		tex[5];
+	char		*tex_n;
+	char		*tex_s;
+	char		*tex_w;
+	char		*tex_e;
 	int			tex_num;
-	int			tex_x;
-	int			tex_y;
-	int			width;
-	int			height;
-	double		wall_x;
-	double		tex_pos;
-	double		step;
 }				t_tex;
 
 typedef struct s_map {
@@ -90,6 +86,7 @@ typedef struct s_map {
 	int			max_row;
 	int			max_col;
 }				t_map;
+
 typedef struct s_ray
 {
 	int		mp;
@@ -142,7 +139,7 @@ int		ft_iswhitespace(int c);
 int		clean(char *err_msg, t_game *g);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strdup(const char *src);
-void	parse_texture(t_game *game, t_data *img, char *line);
+void	parse_texture(t_game *game, char c, char *line);
 void	parse_color(t_game *game, char *line);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);

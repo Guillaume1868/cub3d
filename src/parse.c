@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/09/29 17:03:18 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:04:51 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ static void	parse_line(t_game *game, char *line, int i, int *y)
 	else if (line[i] == '\0' && game->map->map_started == 0)
 		return ;
 	else if (line[i] == 'N' && line[i + 1] == 'O')
-		parse_texture(game, &game->textures->tex[0], line + i + 2);
+		parse_texture(game, 'N', line + i + 2);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		parse_texture(game, &game->textures->tex[1], line + i + 2);
+		parse_texture(game, 'S', line + i + 2);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		parse_texture(game, &game->textures->tex[2], line + i + 2);
+		parse_texture(game, 'W', line + i + 2);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		parse_texture(game, &game->textures->tex[3], line + i + 2);
+		parse_texture(game, 'E', line + i + 2);
 	else if (line[i] == 'F' || line[i] == 'C')
 		parse_color(game, line + i);
 	else if (line[i] == '1' || line[i] == '0')

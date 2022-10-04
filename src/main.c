@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/04 12:52:49 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:34:51 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	clean(char *err_msg, t_game *g)
 		free(g->map->map);
 	if (g->map != NULL)
 		free(g->map);
-	// if (g->textures)
-	// 	free(g->textures);
+	if (g->textures)
+		free(g->textures);
 	if (g->rays != NULL)
 		free(g->rays);
 	if (g->win != NULL)
@@ -185,6 +185,14 @@ void	check_player(t_game *g)
 		clean("Multiple players found", g);
 }
 
+void	setup_textures(t_game *g)
+{
+	load_texture(g, &g->img_n, g->textures->tex_n);
+	load_texture(g, &g->img_s, g->textures->tex_s);
+	load_texture(g, &g->img_w, g->textures->tex_w);
+	load_texture(g, &g->img_e, g->textures->tex_e);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_game	g;
@@ -194,19 +202,18 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		init_map(&g);
-		//init_textures(&g);
+		init_textures(&g);
 		ret = get_map(argv[1], &g);
 		printf("ret: %d\n", ret);
+		if (g.textures->tex_num != 4)
+			clean("Textures missing", &g);
 		if (ret == 1)
 		{
 			check_player(&g);
 			setup_map(&g);
 			check_borders(&g);
 			init(&g);
-			load_texture(&g, &g.img_s, "./img/east.xpm");
-			load_texture(&g, &g.img_n, "./img/north.xpm");
-			load_texture(&g, &g.img_e, "./img/tnt.xpm");
-			load_texture(&g, &g.img_w, "./img/debug.xpm");
+			setup_textures(&g);
 			g.state = playing;
 			draw_all(&g);
 			mlx_loop(g.mlx);
