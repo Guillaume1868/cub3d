@@ -1,7 +1,7 @@
 NAME 	=	cub3D
 
 FILES	=	main minimap pixel_put draw_line move raycast utils threed draw_all\
-			while_dof textures put_wall 3d parse parse_utils utils2 init ft_strtrim\
+			while_dof textures put_wall parse parse_utils utils2 init ft_strtrim\
 			gnl/get_next_line gnl/get_next_line_utils map_border_check
 
 SRC		=	$(addprefix src/, $(FILES:$(FILE_EXTENSION)=.c))

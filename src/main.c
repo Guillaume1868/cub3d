@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/04 12:22:25 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:52:49 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,14 @@ t_game	*init(t_game *g)
 	g->map_width = g->map->max_col;
 	printf("map_h: %d\n", g->map_height);
 	printf("map_w: %d\n", g->map_width);
-	//g->p.angle = 2 * PI / 2;
 	g->p.x += .5;
 	g->p.y += .5;
 	printf("p.x = %f\n", g->p.x);
 	printf("p.y = %f\n", g->p.y);
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
+	g->sky_color = 0x005050ff;
+	g->floor_color = 0x00afafaf;
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, g->map_width * MMS, g->map_height * MMS,
 			"cub3D: minimap");
@@ -112,7 +113,7 @@ t_game	*init(t_game *g)
 	mlx_hook(g->win2, 17, 0, clean, g);
 	g->rays = malloc(sizeof(t_ray) * 1920);
 	if (g->rays == NULL)
-		clean(g);
+		clean("Malloc error", g);
 	return (g);
 }
 
@@ -202,6 +203,10 @@ int	main(int argc, char *argv[])
 			setup_map(&g);
 			check_borders(&g);
 			init(&g);
+			load_texture(&g, &g.img_s, "./img/east.xpm");
+			load_texture(&g, &g.img_n, "./img/north.xpm");
+			load_texture(&g, &g.img_e, "./img/tnt.xpm");
+			load_texture(&g, &g.img_w, "./img/debug.xpm");
 			g.state = playing;
 			draw_all(&g);
 			mlx_loop(g.mlx);

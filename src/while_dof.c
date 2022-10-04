@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   while_dof.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:49:18 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/26 13:52:20 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:29:42 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	while_dof(t_game *g, t_rvars *v, char is_vertical)
 		v->my = (int)(v->ry);
 		v->mp = v->my * g->map_width + v->mx;
 		if (v->mp > 0 && v->mp < g->map_width * g->map_height
-			&& g->map[v->mp] == '1')
+			&& g->map->map[v->mp] == '1')
 			while_dof2(v, is_vertical);
 		else
 		{
