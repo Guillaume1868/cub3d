@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/04 17:34:51 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:46:54 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ t_game	*init(t_game *g)
 	printf("p.y = %f\n", g->p.y);
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
-	g->sky_color = 0x005050ff;
-	g->floor_color = 0x00afafaf;
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, g->map_width * MMS, g->map_height * MMS,
 			"cub3D: minimap");

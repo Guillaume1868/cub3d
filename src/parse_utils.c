@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:05:29 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/04 17:36:51 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:48:56 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	int	get_color(char *line, int *index, t_game *game)
 
 	color = ft_atoi(line + *index);
 	if (color < 0 || color > 255)
-		clean("invalid rgb values\n", game);
+		clean("Invalid rgb values", game);
 	while (ft_isdigit(line[*index]))
 		(*index)++;
 	(*index)++;
@@ -72,7 +72,7 @@ void	parse_color(t_game *game, char *line)
 	int		index;
 
 	if (game->map->map_started == 1)
-		clean("map is not the last info\n", game);
+		clean("The map is not the last info", game);
 	info = *line;
 	line++;
 	while (ft_iswhitespace(*line))
@@ -82,7 +82,7 @@ void	parse_color(t_game *game, char *line)
 	g = get_color(line, &index, game);
 	b = get_color(line, &index, game);
 	if (info == 'F')
-		game->map->floor_color = calculate_color_from_rgb(r, g, b);
+		game->floor_color = calculate_color_from_rgb(r, g, b);
 	else if (info == 'C')
-		game->map->ceiling_color = calculate_color_from_rgb(r, g, b);
+		game->sky_color = calculate_color_from_rgb(r, g, b);
 }

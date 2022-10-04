@@ -8,6 +8,7 @@
 # Lucastuce
 - [ ] Fix le segfault quand on clique sur la croix (faire une fonction qui appelle clean)
 - [ ] Tester (tout casser)
-- [ ] Finir de parse les couleurs
+- [x] Finir de parse les couleurs
+- [ ] Afficher un message d'erreur si aucune couleur n'est indiqué
 - [ ] Clean les trucs qui trainent
 - [ ] Normer
