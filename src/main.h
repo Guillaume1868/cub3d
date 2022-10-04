@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/22 13:07:28 by lucas            ###   ########.fr       */
+/*   Updated: 2022/10/04 12:23:27 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define DR 0.0004848
+# include "textures.h"
 
 typedef struct s_coord
 {
@@ -67,12 +68,6 @@ typedef struct s_data
 
 typedef enum e_state {starting, playing, won, lost}	t_state;
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
 typedef struct s_tex
 {
 	t_data		tex[5];
@@ -95,6 +90,23 @@ typedef struct s_map {
 	int			max_row;
 	int			max_col;
 }				t_map;
+typedef struct s_ray
+{
+	int		mp;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	dist;
+	char	hit;
+}				t_ray;
+
+typedef struct s_range
+{
+	int		min;
+	int		max;
+	int		i;
+	int		realh;
+}				t_range;
 
 typedef struct s_game
 {
@@ -109,6 +121,13 @@ typedef struct s_game
 	int			map_height;
 	t_player	p;
 	t_state		state;
+	t_ray		*rays;
+	t_image		img_n;
+	t_image		img_s;
+	t_image		img_e;
+	t_image		img_w;
+	int			sky_color;
+	int			floor_color;
 }				t_game;
 
 char	*get_next_line(int fd);
@@ -122,10 +141,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_iswhitespace(int c);
 int		clean(char *err_msg, t_game *g);
 char	*ft_strtrim(char const *s1, char const *set);
-t_list	*ft_lstnew(void *content);
 char	*ft_strdup(const char *src);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
 void	parse_texture(t_game *game, t_data *img, char *line);
 void	parse_color(t_game *game, char *line);
 int		ft_isdigit(int c);
@@ -133,5 +149,6 @@ int		ft_atoi(const char *str);
 void	init_map(t_game *g);
 void	init_textures(t_game *g);
 void	check_borders(t_game *g);
+void	load_texture(t_game *g, t_image *i, char *file);
 
 #endif

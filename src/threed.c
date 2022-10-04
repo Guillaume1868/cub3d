@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3d.c                                               :+:      :+:    :+:   */
+/*   threed.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucas <lucas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 17:47:08 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/01 12:49:48 by lucas            ###   ########.fr       */
+/*   Updated: 2022/10/04 12:25:56 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
+#include "put_wall.h"
 #include "pixel_put.h"
 #include <math.h>
 
@@ -36,11 +37,9 @@ void	clear_image(t_game *g, int x, int y)
 	}
 }
 
-void	draw_column(t_game *g, t_rvars *v, int color)
+void	remove_fisheye(t_game *g, t_ray *v)
 {
-	float			lineh;
-	int				i;
-	float			ca;
+	float	ca;
 
 	ca = g->p.angle - v->ra;
 	if (ca < 0)
@@ -48,13 +47,28 @@ void	draw_column(t_game *g, t_rvars *v, int color)
 	if (ca > 2 * PI)
 		ca -= 2 * PI;
 	v->dist = v->dist * cos(ca);
+}
+
+void	draw_column(t_game *g, t_ray *v, int idx)
+{
+	float			lineh;
+	int				j;
+	t_range			r;
+
+	remove_fisheye(g, v);
 	lineh = (1080) / v->dist;
+	r.realh = lineh;
 	if (lineh > 1080)
 		lineh = 1080;
-	i = (1080 - 1 - lineh) / 2 - 1;
-	//printf("%f\n", v->dist);
-	while (++i < (1080 - 1 - lineh) / 2 + lineh)
-	{
-		put_pixels(g, v->r, i, color);
-	}
+	r.i = -1;
+	r.min = (1080 - 1 - lineh) / 2;
+	r.max = (1080 - 1 - lineh) / 2 + lineh;
+	j = -1;
+	while (++j < r.min)
+		put_pixels(g, idx, j, g->sky_color);
+	while (r.min + ++r.i < r.max)
+		put_wall(g, v, idx, r);
+	r.i -= 2;
+	while (r.min + ++r.i < 1080)
+		put_pixels(g, idx, r.min + r.i, g->floor_color);
 }

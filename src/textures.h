@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 15:02:09 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/16 16:00:44 by gaubert          ###   ########.fr       */
+/*   Created: 2022/09/26 14:34:33 by gaubert           #+#    #+#             */
+/*   Updated: 2022/09/26 14:51:57 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef TEXTURES_H
+# define TEXTURES_H
 
-# include "minimap.h"
+# include "main.h"
 
-float	dist(float ax, float ay, float bx, float by);
-void	while_dof(t_game *g, t_rvars *v, char is_vertical);
-void	store_ray(t_game *g, t_rvars *v);
-void	anti_bad(t_ray *rays);
+typedef struct s_image
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
+}				t_image;
+
 #endif

@@ -6,13 +6,14 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/03 13:42:34 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:22:25 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minimap.h"
 #include "move.h"
+#include "draw_all.h"
 #include <math.h>
 #define MAPSIZE 10
 
@@ -32,12 +33,19 @@ char	*fakemap(t_game *g)
 			map[i] = '0';
 	}
 	map[13] = '1';
+	map[42] = '1';
 	map[23] = 'N';
 	g->p.angle = 3 * PI / 2;
 	g->p.x = 3.5;
 	g->p.y = 5.5;
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
+	load_texture(g, &g->img_s, "./img/east.xpm");
+	load_texture(g, &g->img_n, "./img/north.xpm");
+	load_texture(g, &g->img_e, "./img/tnt.xpm");
+	load_texture(g, &g->img_w, "./img/debug.xpm");
+	g->sky_color = 0x005050ff;
+	g->floor_color = 0x00afafaf;
 	return (map);
 }
 
@@ -47,12 +55,28 @@ int	clean(char *err_msg, t_game *g)
 		printf("Error\n%s\n", err_msg);
 	if (g->map->map)
 		free(g->map->map);
-	if (g->map)
+	if (g->map != NULL)
 		free(g->map);
 	// if (g->textures)
 	// 	free(g->textures);
-	if (g->win)
+	if (g->rays != NULL)
+		free(g->rays);
+	if (g->win != NULL)
 		mlx_destroy_window(g->mlx, g->win);
+	if (g->win2 != NULL)
+		mlx_destroy_window(g->mlx, g->win2);
+	// if (g->img_w.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_w);
+	// if (g->img_e.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_e);
+	// if (g->img_s.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_s);
+	// if (g->img_n.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img_n);
+	// if (g->img.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img);
+	// if (g->img2.addr != NULL)
+	// 	mlx_destroy_image(g->mlx, &g->img2);
 	exit (0);
 }
 
@@ -86,6 +110,9 @@ t_game	*init(t_game *g)
 	mlx_hook(g->win, 17, 0, clean, g);
 	mlx_key_hook(g->win2, key_hook, g);
 	mlx_hook(g->win2, 17, 0, clean, g);
+	g->rays = malloc(sizeof(t_ray) * 1920);
+	if (g->rays == NULL)
+		clean(g);
 	return (g);
 }
 
@@ -161,9 +188,7 @@ int	main(int argc, char *argv[])
 {
 	t_game	g;
 	int 	ret;
-	// int x;
-	// x = open("./src/textures/grass.xpm", O_RDONLY);
-	// printf("open: %d\n", x);
+	
 	ret = -1;
 	if (argc == 2)
 	{
@@ -178,18 +203,9 @@ int	main(int argc, char *argv[])
 			check_borders(&g);
 			init(&g);
 			g.state = playing;
-			draw_minimap(&g);
+			draw_all(&g);
 			mlx_loop(g.mlx);
 		}
 	}
-	// printf("tmp: %s\n", g.map->tmp);
-	// printf("map: %s\n", g.map->map);
-	// printf("map + (34 * 5 + 0): %s\n", g.map->map + 170);
-	// printf("map + (34 * 13 + 0): %s\n", g.map->map + 442);
-	// printf("map[34 * 5 + 10]: %c\n", (char)g.map->map[34 * 5 + 9]);
-	// printf("map width: %d\n", g.map->max_col);
-	//printf("map height: %d\n", g.map->max_row);
-	//printf("%d\n", g.map->ceiling_color);
-	//printf("%d\n", g.map->floor_color);
 	return (ret);
 }

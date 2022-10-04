@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 15:02:09 by gaubert           #+#    #+#             */
-/*   Updated: 2022/09/16 16:00:44 by gaubert          ###   ########.fr       */
+/*   Created: 2022/10/01 13:35:45 by gaubert           #+#    #+#             */
+/*   Updated: 2022/10/01 13:36:50 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef RAYCAST_H
+# define RAYCAST_H
 
 # include "minimap.h"
 
-float	dist(float ax, float ay, float bx, float by);
-void	while_dof(t_game *g, t_rvars *v, char is_vertical);
-void	store_ray(t_game *g, t_rvars *v);
-void	anti_bad(t_ray *rays);
+void	vertical_rays(t_rvars *v, t_game *g);
+void	horizontal_rays(t_rvars *v, t_game *g);
+void	ray_cast(t_game *g);
+
 #endif
