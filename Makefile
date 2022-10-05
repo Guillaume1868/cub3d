@@ -1,9 +1,12 @@
 NAME 	=	cub3D
 
-FILES	=	main
+FILES	=	main minimap pixel_put draw_line move raycast utils threed draw_all\
+			while_dof textures put_wall parse parse_utils utils2 init ft_strtrim\
+			gnl/get_next_line gnl/get_next_line_utils map_border_check
 
 SRC		=	$(addprefix src/, $(FILES:$(FILE_EXTENSION)=.c))
-OBJ		= $(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
+OBJ		=	$(addprefix objs/, ${FILES:$(FILE_EXTENSION)=.o})
+_INC	=	-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 INC		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 CC		=	gcc
 
@@ -31,7 +34,7 @@ clean:
 	@ $(RM) $(OBJ)
 	@printf "$(_INFO) $(OBJ) removed.\n"
 fclean: clean
-	@ $(MAKE) clean -C mlx
+	# @ $(MAKE) clean -C mlx
 	@ $(RM) $(NAME)
 	@printf "$(_INFO) $(NAME) removed.\n"
 re: fclean all
