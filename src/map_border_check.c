@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:03:21 by lucas             #+#    #+#             */
-/*   Updated: 2022/10/03 17:20:20 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:33:10 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ void	check_borders(t_game *g)
 	while (i < g->map->max_row)
 	{
 		line = &g->map->map[g->map->max_col * i];
-		printf("line[%d]: %s\n", i, line);
-		printf("max_col: %d\n", g->map->max_col);
 		check_first_char(line, g);
 		check_last_char(line, g);
 		check_inside(line, g, i);

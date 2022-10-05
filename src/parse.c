@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/05 13:21:46 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:34:18 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	open_file(char *file_name, t_game *g)
 void	init_player(t_game *g, char c, int x, int *y)
 {
 	g->p.is_player++;
-	printf("x: %d | y: %d\n", x, *y);
 	g->p.x = x;
 	g->p.y = *y;
 	(void) c;
@@ -69,7 +68,6 @@ void	parse_map(t_game *game, char *line, int *y)
 	{
 		if (ft_strchr("01NSEW 	\n", line[i]) == NULL)
 		{
-			printf("line: %s\n", line);
 			free(line);
 			clean("Invalid char inside map", game);
 		}
@@ -77,14 +75,11 @@ void	parse_map(t_game *game, char *line, int *y)
 			init_player(game, line[i], i, y);
 		i++;
 	}
-	//if (line[i - 1] == '\n')
-	//	line[i - 1] = 0;
 	*y+=1;
 	if (game->map->max_col < (int)ft_strlen(line))
 		game->map->max_col = (int)ft_strlen(line);
 	game->map->tmp = ft_strjoin(game->map->tmp, line);
 	game->map->max_row++;
-	//game->map->max_col--;
 }
 
 static void	parse_line(t_game *game, char *line, int i, int *y)
@@ -125,12 +120,10 @@ int	get_map(char *file, t_game *game)
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
-		printf("y= %d\n", y);
 		if (!line)
 			break ;
 		else
 			parse_line(game, line, 0, &y);
-		printf("%s\n", line);
 		free(line);
 	}
 	close (fd);

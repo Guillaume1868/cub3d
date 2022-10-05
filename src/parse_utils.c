@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:05:29 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/05 13:25:46 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:33:53 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parse_texture(t_game *game, char c, char *line)
 	path = ft_strtrim(line, " ");
 	if (path == NULL)
 		clean("ft_strtrim failed", game);
-	printf("path: %s\n", path);
 	x = open(path, O_RDONLY);
 	if (x < 0)
 		clean("Opening xpm file failed", game);

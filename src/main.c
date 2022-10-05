@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/05 12:15:01 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:33:04 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,6 @@
 #include "move.h"
 #include "draw_all.h"
 #include <math.h>
-#define MAPSIZE 10
-
-char	*fakemap(t_game *g)
-{
-	char	*map;
-	int		i;
-
-	i = -1;
-	map = malloc(MAPSIZE * MAPSIZE * sizeof(char));
-	while (++i < MAPSIZE * MAPSIZE)
-	{
-		if (i < MAPSIZE || i > (MAPSIZE * MAPSIZE - MAPSIZE)
-			|| i % MAPSIZE == MAPSIZE - 1 || i % MAPSIZE == 0)
-			map[i] = '1';
-		else
-			map[i] = '0';
-	}
-	map[13] = '1';
-	map[42] = '1';
-	map[23] = 'N';
-	g->p.angle = 3 * PI / 2;
-	g->p.x = 3.5;
-	g->p.y = 5.5;
-	g->p.dx = cos(g->p.angle) / 5;
-	g->p.dy = sin(g->p.angle) / 5;
-	load_texture(g, &g->img_s, "./img/east.xpm");
-	load_texture(g, &g->img_n, "./img/north.xpm");
-	load_texture(g, &g->img_e, "./img/tnt.xpm");
-	load_texture(g, &g->img_w, "./img/debug.xpm");
-	g->sky_color = 0x005050ff;
-	g->floor_color = 0x00afafaf;
-	return (map);
-}
 
 int	clean(char *err_msg, t_game *g)
 {
@@ -65,18 +32,6 @@ int	clean(char *err_msg, t_game *g)
 		mlx_destroy_window(g->mlx, g->win);
 	if (g->win2 != NULL)
 		mlx_destroy_window(g->mlx, g->win2);
-	// if (g->img_w.addr != NULL)
-	// 	mlx_destroy_image(g->mlx, &g->img_w);
-	// if (g->img_e.addr != NULL)
-	// 	mlx_destroy_image(g->mlx, &g->img_e);
-	// if (g->img_s.addr != NULL)
-	// 	mlx_destroy_image(g->mlx, &g->img_s);
-	// if (g->img_n.addr != NULL)
-	// 	mlx_destroy_image(g->mlx, &g->img_n);
-	// if (g->img.addr != NULL)
-	// 	mlx_destroy_image(g->mlx, &g->img);
-	// if (g->img2.addr != NULL)
-	// 	mlx_destroy_image(g->mlx, &g->img2);
 	exit (0);
 }
 
@@ -93,12 +48,8 @@ t_game	*init(t_game *g)
 		clean("No valid map", g);
 	g->map_height = g->map->max_row;
 	g->map_width = g->map->max_col;
-	printf("map_h: %d\n", g->map_height);
-	printf("map_w: %d\n", g->map_width);
 	g->p.x += .5;
 	g->p.y += .5;
-	printf("p.x = %f\n", g->p.x);
-	printf("p.y = %f\n", g->p.y);
 	g->p.dx = cos(g->p.angle) / 5;
 	g->p.dy = sin(g->p.angle) / 5;
 	g->mlx = mlx_init();
@@ -171,7 +122,6 @@ void	setup_map(t_game *g)
 					break ;
 				}
 				g->map->map[g->map->max_col * i + j] = g->map->tmp[k];
-				printf("g->map->map[%d * %d + %d]: %c | g->map->max_col * i + j: %d | g->map->tmp[%d]: %c\n", g->map->max_col, i, j, g->map->map[g->map->max_col * i + j], g->map->max_col * i + j, k, g->map->tmp[k]);
 				j++;
 				k++;
 			}
@@ -208,7 +158,6 @@ int	main(int argc, char *argv[])
 		init_map(&g);
 		init_textures(&g);
 		ret = get_map(argv[1], &g);
-		printf("ret: %d\n", ret);
 		if (g.textures->tex_num != 4)
 			clean("Textures missing", &g);
 		if (g.sky_color == -1 || g.floor_color == -1)
