@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:05:29 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/05 12:33:53 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:25:46 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static	int	get_color(char *line, int *index, t_game *game)
 {
 	int	color;
 
+	if (!ft_isdigit(line[*index]))
+		return (-1);
 	color = ft_atoi(line + *index);
 	if (color < 0 || color > 255)
 		clean("Invalid rgb values", game);
@@ -81,6 +83,8 @@ void	parse_color(t_game *game, char *line)
 	r = get_color(line, &index, game);
 	g = get_color(line, &index, game);
 	b = get_color(line, &index, game);
+	if (r == -1 || g == -1 || b == -1)
+		clean("Invalid rgb values", game);
 	if (info == 'F')
 		game->floor_color = calculate_color_from_rgb(r, g, b);
 	else if (info == 'C')
