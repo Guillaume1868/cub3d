@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/05 13:34:18 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:35:25 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,6 @@ int	open_file(char *file_name, t_game *g)
 	return (fd);
 }
 
-void	init_player(t_game *g, char c, int x, int *y)
-{
-	g->p.is_player++;
-	g->p.x = x;
-	g->p.y = *y;
-	(void) c;
-	if (c == 'S')
-		g->p.angle = 1 * PI / 2;
-	else if (c == 'W')
-		g->p.angle = 2 * PI / 2;
-	else if (c == 'N')
-		g->p.angle = 3 * PI / 2;
-	else if (c == 'E')
-		g->p.angle = 4 * PI / 2;
-}
-
 void	parse_map(t_game *game, char *line, int *y)
 {
 	int		i;
@@ -75,7 +59,7 @@ void	parse_map(t_game *game, char *line, int *y)
 			init_player(game, line[i], i, y);
 		i++;
 	}
-	*y+=1;
+	(*y) += 1;
 	if (game->map->max_col < (int)ft_strlen(line))
 		game->map->max_col = (int)ft_strlen(line);
 	game->map->tmp = ft_strjoin(game->map->tmp, line);
