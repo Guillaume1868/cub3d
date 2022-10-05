@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:15:08 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/04 16:04:51 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:21:46 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	get_map(char *file, t_game *game)
 	fd = open_file(file, game);
 	line = "";
 	if (fd == -1)
-		return (-1);
+		clean("No such file or directory", game);
 	y = 0;
 	while (line != NULL)
 	{
