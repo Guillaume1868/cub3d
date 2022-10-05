@@ -10,5 +10,5 @@
 - [ ] Tester (tout casser)
 - [x] Finir de parse les couleurs
 - [x] Afficher un message d'erreur si aucune couleur n'est indiqué | couleur fausse etc..
-- [ ] Clean les trucs qui trainent
-- [ ] Normer
+- [x] Clean les trucs qui trainent
+- [x] Normer
