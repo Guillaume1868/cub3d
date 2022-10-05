@@ -6,7 +6,7 @@
 - [ ] final norming
 
 # Lucastuce
-- [ ] Fix le segfault quand on clique sur la croix (faire une fonction qui appelle clean)
+- [x] Fix le segfault quand on clique sur la croix (faire une fonction qui appelle clean)
 - [ ] Tester (tout casser)
 - [x] Finir de parse les couleurs
 - [ ] Afficher un message d'erreur si aucune couleur n'est indiqué

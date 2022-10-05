@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/04 17:46:54 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 11:12:18 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ int	clean(char *err_msg, t_game *g)
 	exit (0);
 }
 
+int	quit_game(t_game *g)
+{
+	clean(NULL, g);
+	return (0);
+}
+
 t_game	*init(t_game *g)
 {
 	g->state = starting;
@@ -106,9 +112,9 @@ t_game	*init(t_game *g)
 	g->img2.addr = mlx_get_data_addr(g->img2.img, &g->img2.bits_per_pixel,
 			&g->img2.line_length, &g->img2.endian);
 	mlx_key_hook(g->win, key_hook, g);
-	mlx_hook(g->win, 17, 0, clean, g);
+	mlx_hook(g->win, 17, 0, quit_game, g);
 	mlx_key_hook(g->win2, key_hook, g);
-	mlx_hook(g->win2, 17, 0, clean, g);
+	mlx_hook(g->win2, 17, 0, quit_game, g);
 	g->rays = malloc(sizeof(t_ray) * 1920);
 	if (g->rays == NULL)
 		clean("Malloc error", g);
