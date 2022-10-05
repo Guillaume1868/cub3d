@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:46:23 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/04 17:12:39 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:14:23 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	init_map(t_game *g)
 	g->map->map_started = 0;
 	g->map->max_row = 0;
 	g->map->max_col = 0;
-	g->map->floor_color = -1;
-	g->map->ceiling_color = -1;
 	g->p.is_player = 0;
 	g->rays = NULL;
 	g->win = NULL;
@@ -40,4 +38,6 @@ void	init_textures(t_game *g)
 	g->textures->tex_s = NULL;
 	g->textures->tex_w = NULL;
 	g->textures->tex_e = NULL;
+	g->floor_color = -1;
+	g->sky_color = -1;
 }

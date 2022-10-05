@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:11:26 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/05 11:12:18 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:15:01 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ int	main(int argc, char *argv[])
 		printf("ret: %d\n", ret);
 		if (g.textures->tex_num != 4)
 			clean("Textures missing", &g);
+		if (g.sky_color == -1 || g.floor_color == -1)
+			clean("One or more colors are missing", &g);
 		if (ret == 1)
 		{
 			check_player(&g);

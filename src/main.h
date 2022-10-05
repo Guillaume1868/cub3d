@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/04 17:36:29 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:14:30 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ typedef struct s_tex
 
 typedef struct s_map {
 	int			map_started;
-	int			floor_color;
-	int			ceiling_color;
 	char		*map;
 	char		*tmp;
 	int			max_row;

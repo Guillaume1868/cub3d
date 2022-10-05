@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:05:29 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/04 17:48:56 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:33:53 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	parse_texture(t_game *game, char c, char *line)
 	int		x;
 
 	if (game->map->map_started == 1)
-		clean("map is not the last info\n", game);
+		clean("Map is not the last info", game);
 	path = ft_strtrim(line, " ");
 	if (path == NULL)
-		clean("ft_strtrim failed\n", game);
+		clean("ft_strtrim failed", game);
 	printf("path: %s\n", path);
 	x = open(path, O_RDONLY);
 	if (x < 0)
-		clean("opening xpm file failed\n", game);
+		clean("Opening xpm file failed", game);
 	if (c == 'N')
 		game->textures->tex_n = ft_strdup(path);
 	else if (c == 'S')
@@ -43,7 +43,6 @@ static int	calculate_color_from_rgb(int r, int g, int b)
 {
 	int	rgb;
 
-	rgb = 0;
 	rgb = r;
 	rgb = (rgb << 8) + g;
 	rgb = (rgb << 8) + b;
@@ -59,7 +58,8 @@ static	int	get_color(char *line, int *index, t_game *game)
 		clean("Invalid rgb values", game);
 	while (ft_isdigit(line[*index]))
 		(*index)++;
-	(*index)++;
+	while (ft_strchr(", ", line[*index]))
+		(*index)++;
 	return (color);
 }
 
