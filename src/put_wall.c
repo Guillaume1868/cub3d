@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_wall.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:07:09 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/03 15:34:27 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/05 14:41:20 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ float	get_wall_y(t_ray *v)
 float	mirror(t_ray *v, float wy)
 {
 	if (v->hit == 'S' || v->hit == 'W')
-		return -wy + 1;
-	return wy;
+		return (-wy + 1);
+	return (wy);
 }
 
 void	put_wall(t_game *g, t_ray *v, int idx, t_range r)
@@ -56,8 +56,6 @@ void	put_wall(t_game *g, t_ray *v, int idx, t_range r)
 	bias = (r.realh - 1080) / 2 + 1;
 	if (bias < 0)
 		bias = 0;
-	// tx = ((float)(r.i) + bias) / ((float)r.max
-	// 		- ((1080 - 1 - r.realh) / 2)) * t->height;
 	tx = ((float)(r.i) + bias) / ((float)((1080 - 1 - r.realh) / 2 + r.realh)
 			- ((1080 - 1 - r.realh) / 2)) * t->height;
 	put_pixels(g, idx, r.i + r.min,
