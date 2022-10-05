@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/05 12:14:30 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:36:15 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdio.h>
 # include <errno.h>
 # include <printf.h>
-#include <sys/types.h>
-#include <sys/uio.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 # include "../mlx/mlx.h"
 # define PI 3.1415926535
 # define P2 1.57079632675
@@ -145,5 +145,14 @@ void	init_map(t_game *g);
 void	init_textures(t_game *g);
 void	check_borders(t_game *g);
 void	load_texture(t_game *g, t_image *i, char *file);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t size);
+void	check_player(t_game *g);
+void	setup_textures(t_game *g);
+void	setup_map(t_game *g);
+t_game	*init(t_game *g);
+int		quit_game(t_game *g);
+void	pre_check(t_game *g);
+void	init_player(t_game *g, char c, int x, int *y);
 
 #endif
