@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:03:21 by lucas             #+#    #+#             */
-/*   Updated: 2022/10/05 13:33:10 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:34:03 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,17 @@ static void	check_last_char(char *line, t_game *g)
 	}
 }
 
-static void	check_inside(char *line, t_game *g, int y)
+static void	check_inside(char *line, t_game *g, int y, int x)
 {
-	int		x;
 	char	*tmp;
 
-	x = 0;
 	tmp = NULL;
-	while (line[x])
+	while (line[++x])
 	{
 		if (line[x] == '0' || ft_strchr("NSEW", line[x]))
 		{
-			if (x - 1 < 0 || y - 1 < 0 || line[x - 1] == ' ' || line[x + 1] == ' ')
+			if (x - 1 < 0 || y - 1 < 0 || line[x - 1] == ' ' || \
+				line[x + 1] == ' ')
 				clean("Map is not surrounded by walls\n", g);
 			if (y > 0)
 			{
@@ -70,7 +69,6 @@ static void	check_inside(char *line, t_game *g, int y)
 					clean("Map is not surrounded by walls\n", g);
 			}
 		}
-		x++;
 	}
 }
 
@@ -99,7 +97,7 @@ void	check_borders(t_game *g)
 		line = &g->map->map[g->map->max_col * i];
 		check_first_char(line, g);
 		check_last_char(line, g);
-		check_inside(line, g, i);
+		check_inside(line, g, i, -1);
 		i++;
 	}
 	line = &g->map->map[g->map->max_col * (g->map->max_row - 1)];
