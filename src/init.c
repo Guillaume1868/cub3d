@@ -6,7 +6,7 @@
 /*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:46:23 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/06 14:17:29 by gaubert          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:22:14 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ t_game	*init(t_game *g)
 	g->img2.addr = mlx_get_data_addr(g->img2.img, &g->img2.bits_per_pixel,
 			&g->img2.line_length, &g->img2.endian);
 	mlx_hook(g->win, 17, 0, quit_game, g);
-	mlx_hook(g->win2, 2, 0,key_hook, g);
-	mlx_hook(g->win, 2, 0,key_hook, g);
+	mlx_hook(g->win2, 2, 0, key_hook, g);
+	mlx_hook(g->win, 2, 0, key_hook, g);
 	mlx_hook(g->win2, 17, 0, quit_game, g);
 	g->rays = malloc(sizeof(t_ray) * 1920);
 	if (g->rays == NULL)
