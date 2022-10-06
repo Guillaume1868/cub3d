@@ -1,6 +1,13 @@
-         
-		  
-		   
-		    
-			 
-			  
+NO ./img/north.xpm
+SO ./img/okau.xpm
+WE ./img/debug.xpm
+EA ./img/tnt.xpm
+
+F 220,100,0
+C 225,30,0
+
+
+
+
+
+
