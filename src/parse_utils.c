@@ -6,34 +6,34 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:05:29 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/05 13:33:53 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:58:57 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./main.h"
 
-void	parse_texture(t_game *game, char c, char *line)
+void	parse_texture(t_game *g, char c, char *line)
 {
 	char	*path;
 	int		x;
 
-	if (game->map->map_started == 1)
-		clean("Map is not the last info", game);
+	if (g->map->map_started == 1)
+		clean("Map is not the last info", g);
 	path = ft_strtrim(line, " ");
 	if (path == NULL)
-		clean("ft_strtrim failed", game);
+		clean("ft_strtrim failed", g);
 	x = open(path, O_RDONLY);
 	if (x < 0)
-		clean("Opening xpm file failed", game);
+		clean("Opening xpm file failed", g);
 	if (c == 'N')
-		game->textures->tex_n = ft_strdup(path);
+		g->textures->tex_n = ft_strdup(path, g);
 	else if (c == 'S')
-		game->textures->tex_s = ft_strdup(path);
+		g->textures->tex_s = ft_strdup(path, g);
 	else if (c == 'W')
-		game->textures->tex_w = ft_strdup(path);
+		g->textures->tex_w = ft_strdup(path, g);
 	else if (c == 'E')
-		game->textures->tex_e = ft_strdup(path);
-	game->textures->tex_num = game->textures->tex_num + 1;
+		g->textures->tex_e = ft_strdup(path, g);
+	g->textures->tex_num = g->textures->tex_num + 1;
 	free(path);
 	close(x);
 }
