@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   while_dof.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gaubert <gaubert@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:49:18 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/04 12:29:42 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:40:46 by gaubert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minimap.h"
+#define DOF 128
 
 void	while_dof2(t_rvars *v, char is_vertical)
 {
@@ -28,12 +29,12 @@ void	while_dof2(t_rvars *v, char is_vertical)
 		else
 			v->hith = 'N';
 	}
-	v->dof = 8;
+	v->dof = DOF;
 }
 
 void	while_dof(t_game *g, t_rvars *v, char is_vertical)
 {
-	while (v->dof < 8)
+	while (v->dof < DOF)
 	{
 		v->mx = (int)(v->rx);
 		v->my = (int)(v->ry);
