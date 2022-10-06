@@ -6,7 +6,7 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 13:08:10 by gaubert           #+#    #+#             */
-/*   Updated: 2022/10/05 14:36:15 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:58:55 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_iswhitespace(int c);
 int		clean(char *err_msg, t_game *g);
 char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_strdup(const char *src);
+char	*ft_strdup(const char *src, t_game *g);
 void	parse_texture(t_game *game, char c, char *line);
 void	parse_color(t_game *game, char *line);
 int		ft_isdigit(int c);

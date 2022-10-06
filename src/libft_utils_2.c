@@ -6,13 +6,13 @@
 /*   By: ldominiq <ldominiq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 16:23:18 by ldominiq          #+#    #+#             */
-/*   Updated: 2022/10/05 14:40:17 by ldominiq         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:56:28 by ldominiq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./main.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(const char *src, t_game *g)
 {
 	int		len;
 	int		i;
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *src)
 	len = ft_strlen(src);
 	copy = (char *)malloc(sizeof(char) * (len + 1));
 	if (!copy)
-		return (NULL);
+		clean("ft_strdup failed", g);
 	i = 0;
 	while (src[i] != '\0')
 	{
